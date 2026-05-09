@@ -1,3 +1,11 @@
+v1.2.0 - Mise à Jour Intégrité & Synchro
+-------------------------------------------
+- Ajout d'une catégorie de mod dédiée : Paint.
+- Implémentation du hachage MD5 pour vérifier l'intégrité des fichiers. L'application compare désormais les fichiers du jeu, les mods et les sauvegardes pour s'assurer que les fichiers originaux du jeu ne soient jamais écrasés par accident par des versions modifiées.
+- Les mods actifs sont désormais « scellés » avec des empreintes digitales numériques uniques dans vos paramètres. Si le lanceur du jeu réinitialise vos fichiers lors d'une mise à jour, Alphy détecte le changement et désactive automatiquement les mods affectés pour éviter les plantages du jeu.
+- Ajout d'une logique pour détecter les changements de version de Rocket League. L'application synchronise et met à jour automatiquement vos sauvegardes originales (vanilla) lorsqu'un patch est détecté, garantissant un point de retour à l'original toujours frais.
+- Reprise du processus de validation au démarrage en tant que tâche de fond non bloquante, réduisant considérablement les gels au lancement et améliorant la réactivité de l'interface utilisateur.
+
 v1.1.0 - Mise à jour de Personnalisation
 -------------------------------------------
 - Ajout de 10 catégories de mods dédiées : Antenna, Banner, Body, Boost, Boost Audio, Decal, Goal Explosion, Hat, Trail, et Wheels.
