@@ -1,0 +1,11 @@
+v1.1.0 - The Foundation Update
+-------------------------------------------
+- Added automated version locking to prevent crashes after Rocket League updates.
+- Implemented automatic backup system for all original .upk game files.
+- Improved the automatic generation of the 'mods' folder structure upon first launch.
+- Major UI improvements for the main dashboard.
+
+v1.0.0 - Initial Release
+-------------------------------------------
+- Core mod manager functionality released.
+- Support for safe, external cosmetic and audio asset swapping.
