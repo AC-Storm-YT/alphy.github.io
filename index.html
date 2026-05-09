@@ -35,7 +35,6 @@
             flex-direction: column;
         }
 
-        /* Navbar */
         nav {
             padding: 1.5rem 2rem;
             display: flex;
@@ -57,6 +56,11 @@
             cursor: pointer;
         }
 
+        .nav-controls {
+            display: flex;
+            align-items: center;
+        }
+
         .nav-links button {
             background: none;
             border: none;
@@ -71,6 +75,22 @@
         .nav-links button:hover, .nav-links button.active {
             color: #fff;
             text-shadow: 0 0 15px rgba(255,255,255,0.3);
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 800;
+            margin-left: 2rem;
+            transition: background 0.2s;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255,255,255,0.2);
         }
 
         main {
@@ -93,7 +113,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Typography & Components */
         code {
             font-family: 'JetBrains Mono', monospace;
             background: rgba(255, 255, 255, 0.1);
@@ -180,7 +199,6 @@
         .card h3 { font-size: 1.5rem; margin-top: 0; color: #fff; }
         .card p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 0; }
 
-        /* Guide / Instructions Step Cards */
         .step-card {
             display: flex;
             gap: 1.5rem;
@@ -224,7 +242,6 @@
             color: var(--text-muted);
         }
 
-        /* Status */
         .status-container { text-align: center; padding: 5rem 2rem; }
         .status-badge {
             font-size: 1.2rem; font-weight: 700; padding: 0.75rem 2rem;
@@ -239,6 +256,9 @@
             .hero h1 { font-size: 3rem; }
             .info-strip { grid-template-columns: 1fr; }
             .step-card { flex-direction: column; align-items: center; text-align: center; }
+            .nav-controls { flex-direction: column; gap: 1rem; }
+            nav { flex-direction: column; gap: 1rem; }
+            .lang-btn { margin-left: 0; }
         }
     </style>
 </head>
@@ -246,31 +266,33 @@
 
     <nav>
         <div class="logo" onclick="navigate('home')">ALPHY</div>
-        <div class="nav-links">
-            <button onclick="navigate('home')" id="nav-home" class="active">Home</button>
-            <button onclick="navigate('guide')" id="nav-guide">How it Works</button>
-            <button onclick="navigate('qa')" id="nav-qa">Q&A</button>
-            <button onclick="navigate('status')" id="nav-status">Status</button>
-            <button onclick="navigate('contact')" id="nav-contact">Contact</button>
+        <div class="nav-controls">
+            <div class="nav-links">
+                <button onclick="navigate('home')" id="nav-home" class="active" data-i18n="navHome">Home</button>
+                <button onclick="navigate('guide')" id="nav-guide" data-i18n="navGuide">How it Works</button>
+                <button onclick="navigate('qa')" id="nav-qa" data-i18n="navQa">Q&A</button>
+                <button onclick="navigate('status')" id="nav-status" data-i18n="navStatus">Status</button>
+                <button onclick="navigate('contact')" id="nav-contact" data-i18n="navContact">Contact</button>
+            </div>
+            <button class="lang-btn" id="btn-lang" onclick="toggleLanguage()">FR</button>
         </div>
     </nav>
 
     <main>
-        <!-- Home Page -->
         <div id="home" class="page active">
             <div class="hero">
                 <div class="hero-content">
-                    <h1>Elevate Your Game.</h1>
-                    <p>The ultimate manager for custom mods.</p>
-                    <a href="https://www.dropbox.com/scl/fi/hc2oiouuxkiwwrs7ogcv4/alphy.zip?rlkey=0zn0y1aqhcxrzpzvojw8orcu3&st=zmegpbn6&dl=1" class="btn-primary">Download for Windows</a>
+                    <h1 data-i18n="heroTitle">Elevate Your Game.</h1>
+                    <p data-i18n="heroSub">The ultimate manager for custom mods.</p>
+                    <a href="https://www.dropbox.com/scl/fi/hc2oiouuxkiwwrs7ogcv4/alphy.zip?rlkey=0zn0y1aqhcxrzpzvojw8orcu3&st=zmegpbn6&dl=1" class="btn-primary" data-i18n="btnDownload">Download for Windows</a>
                     
                     <div class="info-strip">
                         <div class="info-item">
-                            <span>ALPHY VERSION</span>
+                            <span data-i18n="lblAppVer">ALPHY VERSION</span>
                             <strong id="app-version-display">Loading...</strong>
                         </div>
                         <div class="info-item">
-                            <span>GAME VERSION SUPPORTED</span>
+                            <span data-i18n="lblGameVer">GAME VERSION SUPPORTED</span>
                             <strong id="game-version-display">Loading...</strong>
                         </div>
                     </div>
@@ -281,28 +303,27 @@
             </div>
             
             <div class="card">
-                <h3>Safe & External Management</h3>
-                <p>Alphy operates completely outside of game memory, ensuring zero injection and maximum safety. Simply select your mods, and the app instantly secures your original game files with automated backups before any changes take place. One click to apply, one click to restore.</p>
+                <h3 data-i18n="card1Title">Safe & External Management</h3>
+                <p data-i18n="card1Text">Alphy operates completely outside of game memory, ensuring zero injection and maximum safety. Simply select your mods, and the app instantly secures your original game files with automated backups before any changes take place. One click to apply, one click to restore.</p>
             </div>
         </div>
 
-        <!-- Guide Page -->
         <div id="guide" class="page">
-            <h2 style="font-size: 2.5rem; margin-bottom: 3rem;">How it Works</h2>
+            <h2 style="font-size: 2.5rem; margin-bottom: 3rem;" data-i18n="guideTitle">How it Works</h2>
 
             <div class="card step-card">
                 <div class="step-number">1</div>
                 <div class="step-content">
-                    <h3>Select Game Folder</h3>
-                    <p>When you run Alphy for the first time, you will be prompted to select your Rocket League installation folder. This target folder must be named <code>rocketleague</code>. For example: <code>D:\EG\rocketleague</code>.</p>
+                    <h3 data-i18n="step1Title">Select Game Folder</h3>
+                    <p data-i18n="step1Text">When you run Alphy for the first time, you will be prompted to select your Rocket League installation folder. This target folder must be named <code>rocketleague</code>. For example: <code>D:\EG\rocketleague</code>.</p>
                 </div>
             </div>
 
             <div class="card step-card">
                 <div class="step-number">2</div>
                 <div class="step-content">
-                    <h3>The Mods Directory</h3>
-                    <p>Once you run the application, it will automatically generate a <code>mods</code> folder in the exact same location as the Alphy <code>.exe</code> file. Inside, you will find categorized sub-folders ready for your files:</p>
+                    <h3 data-i18n="step2Title">The Mods Directory</h3>
+                    <p data-i18n="step2Text">Once you run the application, it will automatically generate a <code>mods</code> folder in the exact same location as the Alphy <code>.exe</code> file. Inside, you will find categorized sub-folders ready for your files:</p>
                     <div class="folder-grid">
                         <div class="folder-tag">Antenna</div>
                         <div class="folder-tag">Banner</div>
@@ -321,59 +342,52 @@
             <div class="card step-card">
                 <div class="step-number">3</div>
                 <div class="step-content">
-                    <h3>Adding a Mod</h3>
-                    <p>To install a new mod, navigate to the correct category, create a named folder for your mod, and drop the <code>.upk</code> file inside. </p>
-                    <p>For example, if you want to replace the Octane body with a Fennec mod:</p>
-                    <p><code>mods\Body\Fennec (Replaces Octane)\Body_Octane_SF.upk</code></p>
+                    <h3 data-i18n="step3Title">Adding a Mod</h3>
+                    <p data-i18n="step3Text">To install a new mod, navigate to the correct category, create a named folder for your mod, and drop the <code>.upk</code> file inside.<br><br>For example, if you want to replace the Octane body with a Fennec mod:<br><code>mods\Body\Fennec (Replaces Octane)\Body_Octane_SF.upk</code></p>
                 </div>
             </div>
 
             <div class="card step-card">
                 <div class="step-number">4</div>
                 <div class="step-content">
-                    <h3>Automatic Backup & Launch</h3>
-                    <p>Restart or launch Alphy. The app will immediately detect the new mod file and identify which vanilla game file needs to be replaced. Before making any changes, it safely copies your original game file to:</p>
-                    <p><code>%appdata%\Alphy\Backups\Body_Octane_SF.upk.bak</code></p>
-                    <p>Once the backup is secured, Alphy applies the mod and you are ready to play!</p>
+                    <h3 data-i18n="step4Title">Automatic Backup & Launch</h3>
+                    <p data-i18n="step4Text">Restart or launch Alphy. The app will immediately detect the new mod file and identify which vanilla game file needs to be replaced. Before making any changes, it safely copies your original game file to:<br><code>%appdata%\Alphy\Backups\Body_Octane_SF.upk.bak</code><br>Once the backup is secured, Alphy applies the mod and you are ready to play!</p>
                 </div>
             </div>
         </div>
 
-        <!-- Q&A Page -->
         <div id="qa" class="page">
-            <h2 style="font-size: 2.5rem; margin-bottom: 3rem;">Q&A</h2>
+            <h2 style="font-size: 2.5rem; margin-bottom: 3rem;" data-i18n="qaTitle">Q&A</h2>
             
             <div class="card">
-                <h3>Is Alphy safe to use?</h3>
-                <p>Yes. The mods loaded by Alphy are created using RLUPKTools, a utility that edits Unreal Engine Package (<code>.upk</code>) files. This means Alphy operates as a straightforward file manager. Instead of injecting code into your computer's memory while the game is running, Alphy simply swaps cosmetic assets—like 3D models and textures—on your hard drive before you even launch the game. Because it performs local file replacements rather than active memory editing, it does not trigger anti-cheat software.</p>
+                <h3 data-i18n="qa1Title">Is Alphy safe to use?</h3>
+                <p data-i18n="qa1Text">Yes. The mods loaded by Alphy are created using RLUPKTools, a utility that edits Unreal Engine Package (<code>.upk</code>) files. This means Alphy operates as a straightforward file manager. Instead of injecting code into your computer's memory while the game is running, Alphy simply swaps cosmetic assets—like 3D models and textures—on your hard drive before you even launch the game. Because it performs local file replacements rather than active memory editing, it does not trigger anti-cheat software.</p>
             </div>
 
             <div class="card">
-                <h3>Does it make automatic backups?</h3>
-                <p>Always. The moment you apply a mod, Alphy clones your original game files into a secure vault in your AppData folder. You can revert to a clean, vanilla installation instantly through the app interface without ever touching your game folders manually.</p>
+                <h3 data-i18n="qa2Title">Does it make automatic backups?</h3>
+                <p data-i18n="qa2Text">Always. The moment you apply a mod, Alphy clones your original game files into a secure vault in your AppData folder. You can revert to a clean, vanilla installation instantly through the app interface without ever touching your game folders manually.</p>
             </div>
 
             <div class="card">
-                <h3>How does version locking work?</h3>
-                <p>To prevent game crashes after a Rocket League update, Alphy cross-references your game version with our supported version. If a mismatch is detected, the app locks modding features until we verify compatibility.</p>
+                <h3 data-i18n="qa3Title">How does version locking work?</h3>
+                <p data-i18n="qa3Text">To prevent game crashes after a Rocket League update, Alphy cross-references your game version with our supported version. If a mismatch is detected, the app locks modding features until we verify compatibility.</p>
             </div>
         </div>
 
-        <!-- Status Page -->
         <div id="status" class="page">
             <div class="status-container">
-                <div id="status-indicator" class="status-badge">Checking Connection...</div>
-                <h2 id="status-title" style="font-size: 2rem;">System Status</h2>
-                <p id="status-message" style="color: var(--text-muted);">Syncing with the remote server...</p>
+                <div id="status-indicator" class="status-badge" data-i18n="statusSync">Checking Connection...</div>
+                <h2 id="status-title" style="font-size: 2rem;" data-i18n="statusTitle">System Status</h2>
+                <p id="status-message" style="color: var(--text-muted);" data-i18n="statusSyncMsg">Syncing with the remote server...</p>
             </div>
         </div>
 
-        <!-- Contact Page -->
         <div id="contact" class="page">
-            <h2 style="font-size: 2.5rem; margin-bottom: 3rem;">Get in Touch</h2>
+            <h2 style="font-size: 2.5rem; margin-bottom: 3rem;" data-i18n="contactTitle">Get in Touch</h2>
             <div class="card" style="text-align: center;">
-                <p style="margin-bottom: 2rem;">Encountered a bug or have a suggestion? Our support team is ready to help you get back on the field.</p>
-                <a href="mailto:alphymods@outlook.com" class="btn-primary">Email alphymods@outlook.com</a>
+                <p style="margin-bottom: 2rem;" data-i18n="contactText">Encountered a bug or have a suggestion? Our support team is ready to help you get back on the field.</p>
+                <a href="mailto:alphymods@outlook.com" class="btn-primary" data-i18n="contactBtn">Email alphymods@outlook.com</a>
             </div>
         </div>
     </main>
@@ -384,6 +398,84 @@
             appVersion: 'https://dl.dropboxusercontent.com/scl/fi/h05843bnz1d8hqidhg9w7/version.txt?rlkey=efyguxtf300gzsti28adko5sp&st=hbrmduio',
             gameVersion: 'https://dl.dropboxusercontent.com/scl/fi/zlzh4cfqv4khkgp6u7ph0/gameversion.txt?rlkey=hhah3ay5zklmdxnb5bugkqb5s&st=ke41bqek'
         };
+
+        const translations = {
+            en: {
+                navHome: "Home", navGuide: "How it Works", navQa: "Q&A", navStatus: "Status", navContact: "Contact",
+                heroTitle: "Elevate Your Game.", heroSub: "The ultimate manager for custom mods.", btnDownload: "Download for Windows",
+                lblAppVer: "ALPHY VERSION", lblGameVer: "GAME VERSION SUPPORTED",
+                card1Title: "Safe & External Management", card1Text: "Alphy operates completely outside of game memory, ensuring zero injection and maximum safety. Simply select your mods, and the app instantly secures your original game files with automated backups before any changes take place. One click to apply, one click to restore.",
+                guideTitle: "How it Works",
+                step1Title: "Select Game Folder", step1Text: "When you run Alphy for the first time, you will be prompted to select your Rocket League installation folder. This target folder must be named <code>rocketleague</code>. For example: <code>D:\\EG\\rocketleague</code>.",
+                step2Title: "The Mods Directory", step2Text: "Once you run the application, it will automatically generate a <code>mods</code> folder in the exact same location as the Alphy <code>.exe</code> file. Inside, you will find categorized sub-folders ready for your files:",
+                step3Title: "Adding a Mod", step3Text: "To install a new mod, navigate to the correct category, create a named folder for your mod, and drop the <code>.upk</code> file inside.<br><br>For example, if you want to replace the Octane body with a Fennec mod:<br><code>mods\\Body\\Fennec (Replaces Octane)\\Body_Octane_SF.upk</code>",
+                step4Title: "Automatic Backup & Launch", step4Text: "Restart or launch Alphy. The app will immediately detect the new mod file and identify which vanilla game file needs to be replaced. Before making any changes, it safely copies your original game file to:<br><code>%appdata%\\Alphy\\Backups\\Body_Octane_SF.upk.bak</code><br>Once the backup is secured, Alphy applies the mod and you are ready to play!",
+                qaTitle: "Q&A",
+                qa1Title: "Is Alphy safe to use?", qa1Text: "Yes. The mods loaded by Alphy are created using RLUPKTools, a utility that edits Unreal Engine Package (<code>.upk</code>) files. This means Alphy operates as a straightforward file manager. Instead of injecting code into your computer's memory while the game is running, Alphy simply swaps cosmetic assets—like 3D models and textures—on your hard drive before you even launch the game. Because it performs local file replacements rather than active memory editing, it does not trigger anti-cheat software.",
+                qa2Title: "Does it make automatic backups?", qa2Text: "Always. The moment you apply a mod, Alphy clones your original game files into a secure vault in your AppData folder. You can revert to a clean, vanilla installation instantly through the app interface without ever touching your game folders manually.",
+                qa3Title: "How does version locking work?", qa3Text: "To prevent game crashes after a Rocket League update, Alphy cross-references your game version with our supported version. If a mismatch is detected, the app locks modding features until we verify compatibility.",
+                statusTitle: "System Status", statusSync: "Checking Connection...", statusSyncMsg: "Syncing with the remote server...",
+                contactTitle: "Get in Touch", contactText: "Encountered a bug or have a suggestion? Our support team is ready to help you get back on the field.", contactBtn: "Email alphymods@outlook.com",
+                statusMaintenance: "MAINTENANCE", statusMaintenanceMsg: "The mod network is temporarily offline for upgrades.",
+                statusOnline: "OPERATIONAL", statusOnlineMsg: "All systems are running normally. Happy modding!",
+                statusOffline: "OFFLINE", statusOfflineMsg: "Unable to reach server.",
+                toggleBtn: "FR"
+            },
+            fr: {
+                navHome: "Accueil", navGuide: "Tutoriel", navQa: "FAQ", navStatus: "Statut", navContact: "Contact",
+                heroTitle: "Élevez Votre Jeu.", heroSub: "Le gestionnaire ultime pour vos mods personnalisés.", btnDownload: "Télécharger pour Windows",
+                lblAppVer: "VERSION D'ALPHY", lblGameVer: "VERSION DU JEU SUPPORTÉE",
+                card1Title: "Gestion Externe et Sécurisée", card1Text: "Alphy fonctionne complètement en dehors de la mémoire du jeu, garantissant aucune injection et une sécurité maximale. Sélectionnez simplement vos mods, et l'application sécurise instantanément vos fichiers de jeu originaux avec des sauvegardes automatiques avant toute modification. Un clic pour appliquer, un clic pour restaurer.",
+                guideTitle: "Comment ça marche",
+                step1Title: "Sélectionner le dossier du jeu", step1Text: "Lorsque vous lancez Alphy pour la première fois, il vous sera demandé de sélectionner le dossier d'installation de Rocket League. Ce dossier cible doit être nommé <code>rocketleague</code>. Par exemple : <code>D:\\EG\\rocketleague</code>.",
+                step2Title: "Le répertoire des Mods", step2Text: "Une fois l'application lancée, elle générera automatiquement un dossier <code>mods</code> au même emplacement que le fichier <code>.exe</code> d'Alphy. À l'intérieur, vous trouverez des sous-dossiers catégorisés prêts pour vos fichiers :",
+                step3Title: "Ajouter un Mod", step3Text: "Pour installer un nouveau mod, naviguez vers la catégorie correspondante, créez un dossier nommé pour votre mod, et déposez le fichier <code>.upk</code> à l'intérieur.<br><br>Par exemple, si vous souhaitez remplacer la carrosserie Octane par un mod Fennec :<br><code>mods\\Body\\Fennec (Replaces Octane)\\Body_Octane_SF.upk</code>",
+                step4Title: "Sauvegarde Automatique & Lancement", step4Text: "Redémarrez ou lancez Alphy. L'application détectera immédiatement le nouveau fichier mod et identifiera quel fichier de jeu original doit être remplacé. Avant de faire le moindre changement, elle copie en toute sécurité votre fichier de jeu original vers :<br><code>%appdata%\\Alphy\\Backups\\Body_Octane_SF.upk.bak</code><br>Une fois la sauvegarde sécurisée, Alphy applique le mod et vous êtes prêt à jouer !",
+                qaTitle: "FAQ",
+                qa1Title: "Est-ce qu'Alphy est sûr à utiliser ?", qa1Text: "Oui. Les mods chargés par Alphy sont créés avec RLUPKTools, un utilitaire qui modifie les fichiers Unreal Engine Package (<code>.upk</code>). Cela signifie qu'Alphy agit comme un simple gestionnaire de fichiers. Au lieu d'injecter du code dans la mémoire de votre ordinateur pendant que le jeu tourne, Alphy échange simplement des ressources cosmétiques—comme des modèles 3D et des textures—sur votre disque dur avant même que vous lanciez le jeu. Comme il effectue des remplacements de fichiers locaux plutôt que de modifier la mémoire active, il ne déclenche pas les logiciels anti-triche.",
+                qa2Title: "Fait-il des sauvegardes automatiques ?", qa2Text: "Toujours. Au moment où vous appliquez un mod, Alphy clone vos fichiers de jeu originaux dans un coffre-fort sécurisé de votre dossier AppData. Vous pouvez revenir à une installation propre et originale instantanément via l'interface de l'application, sans jamais avoir à manipuler vos dossiers de jeu manuellement.",
+                qa3Title: "Comment fonctionne le verrouillage de version ?", qa3Text: "Pour éviter les plantages du jeu après une mise à jour de Rocket League, Alphy croise la version de votre jeu avec notre version supportée. Si une incohérence est détectée, l'application verrouille les fonctionnalités de modding jusqu'à ce que nous vérifiions la compatibilité.",
+                statusTitle: "Statut du Système", statusSync: "Vérification...", statusSyncMsg: "Synchronisation avec le serveur distant...",
+                contactTitle: "Nous Contacter", contactText: "Vous avez rencontré un bug ou vous avez une suggestion ? Notre équipe de support est prête à vous aider.", contactBtn: "Email alphymods@outlook.com",
+                statusMaintenance: "MAINTENANCE", statusMaintenanceMsg: "Le réseau est temporairement hors ligne pour des mises à jour.",
+                statusOnline: "OPÉRATIONNEL", statusOnlineMsg: "Tous les systèmes fonctionnent normalement. Bon modding !",
+                statusOffline: "HORS LIGNE", statusOfflineMsg: "Impossible de joindre le serveur.",
+                toggleBtn: "EN"
+            }
+        };
+
+        let currentLang = 'en';
+        let currentNetworkStatus = 'syncing';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'fr' : 'en';
+            document.getElementById('btn-lang').innerText = translations[currentLang].toggleBtn;
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
+                }
+            });
+
+            updateStatusTextDisplay();
+        }
+
+        function updateStatusTextDisplay() {
+            const indicator = document.getElementById('status-indicator');
+            const message = document.getElementById('status-message');
+            
+            if (currentNetworkStatus === 'maintenance') {
+                indicator.innerText = translations[currentLang].statusMaintenance;
+                message.innerText = translations[currentLang].statusMaintenanceMsg;
+            } else if (currentNetworkStatus === 'online') {
+                indicator.innerText = translations[currentLang].statusOnline;
+                message.innerText = translations[currentLang].statusOnlineMsg;
+            } else if (currentNetworkStatus === 'offline') {
+                indicator.innerText = translations[currentLang].statusOffline;
+                message.innerText = translations[currentLang].statusOfflineMsg;
+            }
+        }
 
         function navigate(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -406,22 +498,19 @@
 
                 const isLockdown = lock.trim().toLowerCase() === 'true';
                 const indicator = document.getElementById('status-indicator');
-                const message = document.getElementById('status-message');
-
+                
                 if (isLockdown) {
-                    indicator.innerText = 'MAINTENANCE';
+                    currentNetworkStatus = 'maintenance';
                     indicator.className = 'status-badge status-maintenance';
-                    message.innerText = 'The mod network is temporarily offline for upgrades.';
                 } else {
-                    indicator.innerText = 'OPERATIONAL';
+                    currentNetworkStatus = 'online';
                     indicator.className = 'status-badge status-online';
-                    message.innerText = 'All systems are running normally. Happy modding!';
                 }
             } catch (e) {
-                document.getElementById('status-indicator').innerText = 'OFFLINE';
+                currentNetworkStatus = 'offline';
                 document.getElementById('status-indicator').className = 'status-badge status-maintenance';
-                document.getElementById('status-message').innerText = 'Unable to reach server.';
             }
+            updateStatusTextDisplay();
         }
 
         window.addEventListener('DOMContentLoaded', fetchAppData);
