@@ -17,6 +17,7 @@
             --text-muted: #94a3b8;
             --success: #10b981;
             --danger: #ef4444;
+            --primary-color: #0078D4;
         }
 
         * { box-sizing: border-box; }
@@ -242,6 +243,69 @@
             color: var(--text-muted);
         }
 
+        .patch-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(12px);
+            transition: background 0.3s;
+        }
+
+        .patch-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .patch-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1.5rem;
+        }
+
+        .patch-version {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            font-family: 'JetBrains Mono', monospace;
+            box-shadow: 0 5px 15px -5px rgba(0, 120, 212, 0.4);
+        }
+
+        .patch-title {
+            font-size: 1.4rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .patch-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .patch-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .patch-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
         .status-container { text-align: center; padding: 5rem 2rem; }
         .status-badge {
             font-size: 1.2rem; font-weight: 700; padding: 0.75rem 2rem;
@@ -259,6 +323,7 @@
             .nav-controls { flex-direction: column; gap: 1rem; }
             nav { flex-direction: column; gap: 1rem; }
             .lang-btn { margin-left: 0; }
+            .patch-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
         }
     </style>
 </head>
@@ -270,6 +335,7 @@
             <div class="nav-links">
                 <button onclick="navigate('home')" id="nav-home" class="active" data-i18n="navHome">Home</button>
                 <button onclick="navigate('guide')" id="nav-guide" data-i18n="navGuide">How it Works</button>
+                <button onclick="navigate('patch')" id="nav-patch" data-i18n="navPatch">Patch Notes</button>
                 <button onclick="navigate('qa')" id="nav-qa" data-i18n="navQa">Q&A</button>
                 <button onclick="navigate('status')" id="nav-status" data-i18n="navStatus">Status</button>
                 <button onclick="navigate('contact')" id="nav-contact" data-i18n="navContact">Contact</button>
@@ -284,7 +350,7 @@
                 <div class="hero-content">
                     <h1 data-i18n="heroTitle">Elevate Your Game.</h1>
                     <p data-i18n="heroSub">The ultimate manager for custom mods.</p>
-                    <a href="https://www.dropbox.com/scl/fi/hc2oiouuxkiwwrs7ogcv4/alphy.zip?rlkey=0zn0y1aqhcxrzpzvojw8orcu3&st=zmegpbn6&dl=1" class="btn-primary" data-i18n="btnDownload">Download for Windows</a>
+                    <a href="https://github.com/AC-Storm-YT/alphy.github.io/raw/refs/heads/main/alphy.zip" class="btn-primary" data-i18n="btnDownload">Download for Windows</a>
                     
                     <div class="info-strip">
                         <div class="info-item">
@@ -356,12 +422,19 @@
             </div>
         </div>
 
+        <div id="patch" class="page">
+            <h2 style="font-size: 2.5rem; margin-bottom: 3rem;" data-i18n="patchTitle">Patch Notes</h2>
+            <div id="changelog-display">
+                <p style="color: var(--text-muted);">Loading...</p>
+            </div>
+        </div>
+
         <div id="qa" class="page">
             <h2 style="font-size: 2.5rem; margin-bottom: 3rem;" data-i18n="qaTitle">Q&A</h2>
             
             <div class="card">
                 <h3 data-i18n="qa1Title">Is Alphy safe to use?</h3>
-                <p data-i18n="qa1Text">Yes. The mods loaded by Alphy are created using RLUPKTools, a utility that edits Unreal Engine Package (<code>.upk</code>) files. This means Alphy operates as a straightforward file manager. Instead of injecting code into your computer's memory while the game is running, Alphy simply swaps cosmetic assets—like 3D models and textures—on your hard drive before you even launch the game. Because it performs local file replacements rather than active memory editing, it does not trigger anti-cheat software.</p>
+                <p data-i18n="qa1Text">Yes. The mods loaded by Alphy are created using <a href='https://github.com/CrunchyRL/RLUPKTools' target='_blank' style='color: #60a5fa; text-decoration: underline;'>RLUPKTools</a>, a utility that edits Unreal Engine Package (<code>.upk</code>) files. This means Alphy operates as a straightforward file manager. Instead of injecting code into your computer's memory while the game is running, Alphy simply swaps cosmetic assets—like 3D models and textures—on your hard drive before you even launch the game. Because it performs local file replacements rather than active memory editing, it does not trigger anti-cheat software.</p>
             </div>
 
             <div class="card">
@@ -372,6 +445,11 @@
             <div class="card">
                 <h3 data-i18n="qa3Title">How does version locking work?</h3>
                 <p data-i18n="qa3Text">To prevent game crashes after a Rocket League update, Alphy cross-references your game version with our supported version. If a mismatch is detected, the app locks modding features until we verify compatibility.</p>
+            </div>
+
+            <div class="card">
+                <h3 data-i18n="qa4Title">Is Alphy free?</h3>
+                <p data-i18n="qa4Text">Yes, it is completely free and will never become paid software. We also do not accept donations, as the app requires files from another source to be useful, and we feel it wouldn't be right to accept money for it.</p>
             </div>
         </div>
 
@@ -394,14 +472,16 @@
 
     <script>
         const URLS = {
-            lockdown: 'https://dl.dropboxusercontent.com/scl/fi/27ouvgxi53penn4i29u2z/lockdown.txt?rlkey=x8nn5ept73f9d5lrsv6csowg7&st=1v5t3ups',
-            appVersion: 'https://dl.dropboxusercontent.com/scl/fi/h05843bnz1d8hqidhg9w7/version.txt?rlkey=efyguxtf300gzsti28adko5sp&st=hbrmduio',
-            gameVersion: 'https://dl.dropboxusercontent.com/scl/fi/zlzh4cfqv4khkgp6u7ph0/gameversion.txt?rlkey=hhah3ay5zklmdxnb5bugkqb5s&st=ke41bqek'
+            lockdown: 'https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/lockdown.txt',
+            appVersion: 'https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/version.txt',
+            gameVersion: 'https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/gameversion.txt',
+            changelogEN: 'https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/changelog.txt',
+            changelogFR: 'https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/changelog_fr.txt'
         };
 
         const translations = {
             en: {
-                navHome: "Home", navGuide: "How it Works", navQa: "Q&A", navStatus: "Status", navContact: "Contact",
+                navHome: "Home", navGuide: "How it Works", navPatch: "Patch Notes", navQa: "Q&A", navStatus: "Status", navContact: "Contact",
                 heroTitle: "Elevate Your Game.", heroSub: "The ultimate manager for custom mods.", btnDownload: "Download for Windows",
                 lblAppVer: "ALPHY VERSION", lblGameVer: "GAME VERSION SUPPORTED",
                 card1Title: "Safe & External Management", card1Text: "Alphy operates completely outside of game memory, ensuring zero injection and maximum safety. Simply select your mods, and the app instantly secures your original game files with automated backups before any changes take place. One click to apply, one click to restore.",
@@ -410,10 +490,12 @@
                 step2Title: "The Mods Directory", step2Text: "Once you run the application, it will automatically generate a <code>mods</code> folder in the exact same location as the Alphy <code>.exe</code> file. Inside, you will find categorized sub-folders ready for your files:",
                 step3Title: "Adding a Mod", step3Text: "To install a new mod, navigate to the correct category, create a named folder for your mod, and drop the <code>.upk</code> file inside.<br><br>For example, if you want to replace the Octane body with a Fennec mod:<br><code>mods\\Body\\Fennec (Replaces Octane)\\Body_Octane_SF.upk</code>",
                 step4Title: "Automatic Backup & Launch", step4Text: "Restart or launch Alphy. The app will immediately detect the new mod file and identify which vanilla game file needs to be replaced. Before making any changes, it safely copies your original game file to:<br><code>%appdata%\\Alphy\\Backups\\Body_Octane_SF.upk.bak</code><br>Once the backup is secured, Alphy applies the mod and you are ready to play!",
+                patchTitle: "Patch Notes",
                 qaTitle: "Q&A",
-                qa1Title: "Is Alphy safe to use?", qa1Text: "Yes. The mods loaded by Alphy are created using RLUPKTools, a utility that edits Unreal Engine Package (<code>.upk</code>) files. This means Alphy operates as a straightforward file manager. Instead of injecting code into your computer's memory while the game is running, Alphy simply swaps cosmetic assets—like 3D models and textures—on your hard drive before you even launch the game. Because it performs local file replacements rather than active memory editing, it does not trigger anti-cheat software.",
+                qa1Title: "Is Alphy safe to use?", qa1Text: "Yes. The mods loaded by Alphy are created using <a href='https://github.com/CrunchyRL/RLUPKTools' target='_blank' style='color: #60a5fa; text-decoration: underline;'>RLUPKTools</a>, a utility that edits Unreal Engine Package (<code>.upk</code>) files. This means Alphy operates as a straightforward file manager. Instead of injecting code into your computer's memory while the game is running, Alphy simply swaps cosmetic assets—like 3D models and textures—on your hard drive before you even launch the game. Because it performs local file replacements rather than active memory editing, it does not trigger anti-cheat software.",
                 qa2Title: "Does it make automatic backups?", qa2Text: "Always. The moment you apply a mod, Alphy clones your original game files into a secure vault in your AppData folder. You can revert to a clean, vanilla installation instantly through the app interface without ever touching your game folders manually.",
                 qa3Title: "How does version locking work?", qa3Text: "To prevent game crashes after a Rocket League update, Alphy cross-references your game version with our supported version. If a mismatch is detected, the app locks modding features until we verify compatibility.",
+                qa4Title: "Is Alphy free?", qa4Text: "Yes, it is completely free and will never become paid software. We also do not accept donations, as the app requires files from another source to be useful, and we feel it wouldn't be right to accept money for it.",
                 statusTitle: "System Status", statusSync: "Checking Connection...", statusSyncMsg: "Syncing with the remote server...",
                 contactTitle: "Get in Touch", contactText: "Encountered a bug or have a suggestion? Our support team is ready to help you get back on the field.", contactBtn: "Email alphymods@outlook.com",
                 statusMaintenance: "MAINTENANCE", statusMaintenanceMsg: "The mod network is temporarily offline for upgrades.",
@@ -422,7 +504,7 @@
                 toggleBtn: "FR"
             },
             fr: {
-                navHome: "Accueil", navGuide: "Tutoriel", navQa: "FAQ", navStatus: "Statut", navContact: "Contact",
+                navHome: "Accueil", navGuide: "Tutoriel", navPatch: "Notes de version", navQa: "FAQ", navStatus: "Statut", navContact: "Contact",
                 heroTitle: "Élevez Votre Jeu.", heroSub: "Le gestionnaire ultime pour vos mods personnalisés.", btnDownload: "Télécharger pour Windows",
                 lblAppVer: "VERSION D'ALPHY", lblGameVer: "VERSION DU JEU SUPPORTÉE",
                 card1Title: "Gestion Externe et Sécurisée", card1Text: "Alphy fonctionne complètement en dehors de la mémoire du jeu, garantissant aucune injection et une sécurité maximale. Sélectionnez simplement vos mods, et l'application sécurise instantanément vos fichiers de jeu originaux avec des sauvegardes automatiques avant toute modification. Un clic pour appliquer, un clic pour restaurer.",
@@ -431,10 +513,12 @@
                 step2Title: "Le répertoire des Mods", step2Text: "Une fois l'application lancée, elle générera automatiquement un dossier <code>mods</code> au même emplacement que le fichier <code>.exe</code> d'Alphy. À l'intérieur, vous trouverez des sous-dossiers catégorisés prêts pour vos fichiers :",
                 step3Title: "Ajouter un Mod", step3Text: "Pour installer un nouveau mod, naviguez vers la catégorie correspondante, créez un dossier nommé pour votre mod, et déposez le fichier <code>.upk</code> à l'intérieur.<br><br>Par exemple, si vous souhaitez remplacer la carrosserie Octane par un mod Fennec :<br><code>mods\\Body\\Fennec (Replaces Octane)\\Body_Octane_SF.upk</code>",
                 step4Title: "Sauvegarde Automatique & Lancement", step4Text: "Redémarrez ou lancez Alphy. L'application détectera immédiatement le nouveau fichier mod et identifiera quel fichier de jeu original doit être remplacé. Avant de faire le moindre changement, elle copie en toute sécurité votre fichier de jeu original vers :<br><code>%appdata%\\Alphy\\Backups\\Body_Octane_SF.upk.bak</code><br>Une fois la sauvegarde sécurisée, Alphy applique le mod et vous êtes prêt à jouer !",
+                patchTitle: "Notes de version",
                 qaTitle: "FAQ",
-                qa1Title: "Est-ce qu'Alphy est sûr à utiliser ?", qa1Text: "Oui. Les mods chargés par Alphy sont créés avec RLUPKTools, un utilitaire qui modifie les fichiers Unreal Engine Package (<code>.upk</code>). Cela signifie qu'Alphy agit comme un simple gestionnaire de fichiers. Au lieu d'injecter du code dans la mémoire de votre ordinateur pendant que le jeu tourne, Alphy échange simplement des ressources cosmétiques—comme des modèles 3D et des textures—sur votre disque dur avant même que vous lanciez le jeu. Comme il effectue des remplacements de fichiers locaux plutôt que de modifier la mémoire active, il ne déclenche pas les logiciels anti-triche.",
+                qa1Title: "Est-ce qu'Alphy est sûr à utiliser ?", qa1Text: "Oui. Les mods chargés par Alphy sont créés avec <a href='https://github.com/CrunchyRL/RLUPKTools' target='_blank' style='color: #60a5fa; text-decoration: underline;'>RLUPKTools</a>, un utilitaire qui modifie les fichiers Unreal Engine Package (<code>.upk</code>). Cela signifie qu'Alphy agit comme un simple gestionnaire de fichiers. Au lieu d'injecter du code dans la mémoire de votre ordinateur pendant que le jeu tourne, Alphy échange simplement des ressources cosmétiques—comme des modèles 3D et des textures—sur votre disque dur avant même que vous lanciez le jeu. Comme il effectue des remplacements de fichiers locaux plutôt que de modifier la mémoire active, il ne déclenche pas les logiciels anti-triche.",
                 qa2Title: "Fait-il des sauvegardes automatiques ?", qa2Text: "Toujours. Au moment où vous appliquez un mod, Alphy clone vos fichiers de jeu originaux dans un coffre-fort sécurisé de votre dossier AppData. Vous pouvez revenir à une installation propre et originale instantanément via l'interface de l'application, sans jamais avoir à manipuler vos dossiers de jeu manuellement.",
                 qa3Title: "Comment fonctionne le verrouillage de version ?", qa3Text: "Pour éviter les plantages du jeu après une mise à jour de Rocket League, Alphy croise la version de votre jeu avec notre version supportée. Si une incohérence est détectée, l'application verrouille les fonctionnalités de modding jusqu'à ce que nous vérifiions la compatibilité.",
+                qa4Title: "Est-ce qu'Alphy est gratuit ?", qa4Text: "Oui, il est 100 % gratuit et ne deviendra jamais un logiciel payant. Nous n'acceptons pas non plus les dons, car l'application nécessite des fichiers provenant d'une autre source pour être utile, et nous estimons qu'il ne serait pas correct d'accepter de l'argent pour cela.",
                 statusTitle: "Statut du Système", statusSync: "Vérification...", statusSyncMsg: "Synchronisation avec le serveur distant...",
                 contactTitle: "Nous Contacter", contactText: "Vous avez rencontré un bug ou vous avez une suggestion ? Notre équipe de support est prête à vous aider.", contactBtn: "Email alphymods@outlook.com",
                 statusMaintenance: "MAINTENANCE", statusMaintenanceMsg: "Le réseau est temporairement hors ligne pour des mises à jour.",
@@ -446,6 +530,9 @@
 
         let currentLang = 'en';
         let currentNetworkStatus = 'syncing';
+        
+        let loadedChangelogEN = '';
+        let loadedChangelogFR = '';
 
         function toggleLanguage() {
             currentLang = currentLang === 'en' ? 'fr' : 'en';
@@ -457,6 +544,9 @@
                     el.innerHTML = translations[currentLang][key];
                 }
             });
+
+            const activeChangelogText = currentLang === 'fr' ? loadedChangelogFR : loadedChangelogEN;
+            document.getElementById('changelog-display').innerHTML = parseChangelogToHTML(activeChangelogText);
 
             updateStatusTextDisplay();
         }
@@ -485,16 +575,59 @@
             window.scrollTo(0, 0);
         }
 
+        function parseChangelogToHTML(text) {
+            if (!text || text.trim() === '404: Not Found') return '<p style="color: var(--text-muted);">No patch notes available for this language yet.</p>';
+            
+            const lines = text.split('\n');
+            let html = '';
+            let inCard = false;
+
+            lines.forEach(line => {
+                line = line.trim();
+                if (!line || line.startsWith('---')) return; 
+
+                if (line.toLowerCase().startsWith('v')) {
+                    if (inCard) html += '</ul></div>';
+                    let parts = line.split('-');
+                    let version = parts[0].trim();
+                    let title = parts.slice(1).join('-').trim();
+                    
+                    html += `<div class="patch-card">
+                                <div class="patch-header">
+                                    <span class="patch-version">${version}</span>
+                                    <span class="patch-title">${title}</span>
+                                </div>
+                                <ul class="patch-list">`;
+                    inCard = true;
+                } else if (line.startsWith('-') || line.startsWith('*')) {
+                    let bulletText = line.substring(1).trim();
+                    if (inCard) html += `<li>${bulletText}</li>`;
+                } else {
+                    if (inCard) html += `<li style="list-style:none; padding-left:0; margin-top:0.5rem; color:var(--text-color);">${line}</li>`;
+                }
+            });
+            
+            if (inCard) html += '</ul></div>';
+            return html || '<p style="color: var(--text-muted);">No patch notes available.</p>';
+        }
+
         async function fetchAppData() {
             try {
-                const [appV, gameV, lock] = await Promise.all([
+                const [appV, gameV, lock, clEN, clFR] = await Promise.all([
                     fetch(URLS.appVersion).then(r => r.text()),
                     fetch(URLS.gameVersion).then(r => r.text()),
-                    fetch(URLS.lockdown).then(r => r.text())
+                    fetch(URLS.lockdown).then(r => r.text()),
+                    fetch(URLS.changelogEN).then(r => r.ok ? r.text() : ''),
+                    fetch(URLS.changelogFR).then(r => r.ok ? r.text() : '')
                 ]);
 
                 document.getElementById('app-version-display').innerText = appV.trim();
                 document.getElementById('game-version-display').innerText = gameV.trim();
+                
+                loadedChangelogEN = clEN;
+                loadedChangelogFR = clFR || clEN; 
+                
+                document.getElementById('changelog-display').innerHTML = parseChangelogToHTML(loadedChangelogEN);
 
                 const isLockdown = lock.trim().toLowerCase() === 'true';
                 const indicator = document.getElementById('status-indicator');
@@ -509,6 +642,7 @@
             } catch (e) {
                 currentNetworkStatus = 'offline';
                 document.getElementById('status-indicator').className = 'status-badge status-maintenance';
+                document.getElementById('changelog-display').innerHTML = '<p style="color: var(--danger);">Unable to fetch patch notes from the server.</p>';
             }
             updateStatusTextDisplay();
         }
