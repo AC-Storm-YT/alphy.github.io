@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphy | Secure Mod Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #08090b;
+            --accent-gradient: linear-gradient(135deg, #0078D4 0%, #6240E8 100%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-color: #f8f9fa;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(0, 120, 212, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 100% 100%, rgba(98, 64, 232, 0.15) 0%, transparent 25%);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        nav {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-left: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .nav-links button:hover, .nav-links button.active {
+            color: #fff;
+            text-shadow: 0 0 15px rgba(255,255,255,0.3);
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .page {
+            display: none;
+            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .page.active { display: block; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography & Components */
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #60a5fa;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            padding: 4rem 0;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            margin: 0 0 1.5rem 0;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image img:hover { transform: scale(1.02) rotate(1deg); }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 1.1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 20px -5px rgba(0, 120, 212, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -5px rgba(0, 120, 212, 0.6);
+        }
+
+        .info-strip {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .info-item span { color: var(--text-muted); font-size: 0.85rem; display: block; }
+        .info-item strong { font-size: 1.1rem; color: #fff; }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            border-radius: 24px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(12px);
+        }
+
+        .card h3 { font-size: 1.5rem; margin-top: 0; color: #fff; }
+        .card p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 0; }
+
+        /* Guide / Instructions Step Cards */
+        .step-card {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: var(--accent-gradient);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 800;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            flex-shrink: 0;
+            box-shadow: 0 10px 20px -5px rgba(0, 120, 212, 0.4);
+        }
+
+        .step-content { flex: 1; }
+        .step-content h3 { margin-bottom: 0.5rem; }
+        .step-content p { margin-bottom: 1rem; }
+        
+        .folder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .folder-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem;
+            border-radius: 6px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Status */
+        .status-container { text-align: center; padding: 5rem 2rem; }
+        .status-badge {
+            font-size: 1.2rem; font-weight: 700; padding: 0.75rem 2rem;
+            border-radius: 100px; display: inline-block; margin-bottom: 2rem;
+        }
+
+        .status-online { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid var(--success); }
+        .status-maintenance { background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid var(--danger); }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+            .hero h1 { font-size: 3rem; }
+            .info-strip { grid-template-columns: 1fr; }
+            .step-card { flex-direction: column; align-items: center; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo" onclick="navigate('home')">ALPHY</div>
+        <div class="nav-links">
+            <button onclick="navigate('home')" id="nav-home" class="active">Home</button>
+            <button onclick="navigate('guide')" id="nav-guide">How it Works</button>
+            <button onclick="navigate('qa')" id="nav-qa">Q&A</button>
+            <button onclick="navigate('status')" id="nav-status">Status</button>
+            <button onclick="navigate('contact')" id="nav-contact">Contact</button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Elevate Your Game.</h1>
+                    <p>The ultimate manager for custom mods.</p>
+                    <a href="https://www.dropbox.com/scl/fi/hc2oiouuxkiwwrs7ogcv4/alphy.zip?rlkey=0zn0y1aqhcxrzpzvojw8orcu3&st=zmegpbn6&dl=1" class="btn-primary">Download for Windows</a>
+                    
+                    <div class="info-strip">
+                        <div class="info-item">
+                            <span>ALPHY VERSION</span>
+                            <strong id="app-version-display">Loading...</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>GAME VERSION SUPPORTED</span>
+                            <strong id="game-version-display">Loading...</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://github.com/AC-Storm-YT/Alphy/blob/main/preview/alphy1.1.0_preview.png?raw=true" alt="Alphy Preview">
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Safe & External Management</h3>
+                <p>Alphy operates completely outside of game memory, ensuring zero injection and maximum safety. Simply select your mods, and the app instantly secures your original game files with automated backups before any changes take place. One click to apply, one click to restore.</p>
+            </div>
+        </div>
+
+        <!-- Guide Page -->
+        <div id="guide" class="page">
+            <h2 style="font-size: 2.5rem; margin-bottom: 3rem;">How it Works</h2>
+
+            <div class="card step-card">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Select Game Folder</h3>
+                    <p>When you run Alphy for the first time, you will be prompted to select your Rocket League installation folder. This target folder must be named <code>rocketleague</code>. For example: <code>D:\EG\rocketleague</code>.</p>
+                </div>
+            </div>
+
+            <div class="card step-card">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>The Mods Directory</h3>
+                    <p>Once you run the application, it will automatically generate a <code>mods</code> folder in the exact same location as the Alphy <code>.exe</code> file. Inside, you will find categorized sub-folders ready for your files:</p>
+                    <div class="folder-grid">
+                        <div class="folder-tag">Antenna</div>
+                        <div class="folder-tag">Banner</div>
+                        <div class="folder-tag">Body</div>
+                        <div class="folder-tag">Boost</div>
+                        <div class="folder-tag">Boost Audio</div>
+                        <div class="folder-tag">Decal</div>
+                        <div class="folder-tag">Goal Explosion</div>
+                        <div class="folder-tag">Hat</div>
+                        <div class="folder-tag">Trail</div>
+                        <div class="folder-tag">Wheels</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card step-card">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Adding a Mod</h3>
+                    <p>To install a new mod, navigate to the correct category, create a named folder for your mod, and drop the <code>.upk</code> file inside. </p>
+                    <p>For example, if you want to replace the Octane body with a Fennec mod:</p>
+                    <p><code>mods\Body\Fennec (Replaces Octane)\Body_Octane_SF.upk</code></p>
+                </div>
+            </div>
+
+            <div class="card step-card">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Automatic Backup & Launch</h3>
+                    <p>Restart or launch Alphy. The app will immediately detect the new mod file and identify which vanilla game file needs to be replaced. Before making any changes, it safely copies your original game file to:</p>
+                    <p><code>%appdata%\Alphy\Backups\Body_Octane_SF.upk.bak</code></p>
+                    <p>Once the backup is secured, Alphy applies the mod and you are ready to play!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q&A Page -->
+        <div id="qa" class="page">
+            <h2 style="font-size: 2.5rem; margin-bottom: 3rem;">Q&A</h2>
+            
+            <div class="card">
+                <h3>Is Alphy safe to use?</h3>
+                <p>Yes. The mods loaded by Alphy are created using RLUPKTools, a utility that edits Unreal Engine Package (<code>.upk</code>) files. This means Alphy operates as a straightforward file manager. Instead of injecting code into your computer's memory while the game is running, Alphy simply swaps cosmetic assets—like 3D models and textures—on your hard drive before you even launch the game. Because it performs local file replacements rather than active memory editing, it does not trigger anti-cheat software.</p>
+            </div>
+
+            <div class="card">
+                <h3>Does it make automatic backups?</h3>
+                <p>Always. The moment you apply a mod, Alphy clones your original game files into a secure vault in your AppData folder. You can revert to a clean, vanilla installation instantly through the app interface without ever touching your game folders manually.</p>
+            </div>
+
+            <div class="card">
+                <h3>How does version locking work?</h3>
+                <p>To prevent game crashes after a Rocket League update, Alphy cross-references your game version with our live database. If a mismatch is detected, the app locks modding features until we verify compatibility.</p>
+            </div>
+        </div>
+
+        <!-- Status Page -->
+        <div id="status" class="page">
+            <div class="status-container">
+                <div id="status-indicator" class="status-badge">Checking Connection...</div>
+                <h2 id="status-title" style="font-size: 2rem;">System Status</h2>
+                <p id="status-message" style="color: var(--text-muted);">Syncing with the remote server...</p>
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <h2 style="font-size: 2.5rem; margin-bottom: 3rem;">Get in Touch</h2>
+            <div class="card" style="text-align: center;">
+                <p style="margin-bottom: 2rem;">Encountered a bug or have a suggestion? Our support team is ready to help you get back on the field.</p>
+                <a href="mailto:alphymods@outlook.com" class="btn-primary">Email alphymods@outlook.com</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const URLS = {
+            lockdown: 'https://dl.dropboxusercontent.com/scl/fi/27ouvgxi53penn4i29u2z/lockdown.txt?rlkey=x8nn5ept73f9d5lrsv6csowg7&st=1v5t3ups',
+            appVersion: 'https://dl.dropboxusercontent.com/scl/fi/h05843bnz1d8hqidhg9w7/version.txt?rlkey=efyguxtf300gzsti28adko5sp&st=hbrmduio',
+            gameVersion: 'https://dl.dropboxusercontent.com/scl/fi/zlzh4cfqv4khkgp6u7ph0/gameversion.txt?rlkey=hhah3ay5zklmdxnb5bugkqb5s&st=ke41bqek'
+        };
+
+        function navigate(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            document.getElementById('nav-' + pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        async function fetchAppData() {
+            try {
+                const [appV, gameV, lock] = await Promise.all([
+                    fetch(URLS.appVersion).then(r => r.text()),
+                    fetch(URLS.gameVersion).then(r => r.text()),
+                    fetch(URLS.lockdown).then(r => r.text())
+                ]);
+
+                document.getElementById('app-version-display').innerText = appV.trim();
+                document.getElementById('game-version-display').innerText = gameV.trim();
+
+                const isLockdown = lock.trim().toLowerCase() === 'true';
+                const indicator = document.getElementById('status-indicator');
+                const message = document.getElementById('status-message');
+
+                if (isLockdown) {
+                    indicator.innerText = 'MAINTENANCE';
+                    indicator.className = 'status-badge status-maintenance';
+                    message.innerText = 'The mod network is temporarily offline for upgrades.';
+                } else {
+                    indicator.innerText = 'OPERATIONAL';
+                    indicator.className = 'status-badge status-online';
+                    message.innerText = 'All systems are running normally. Happy modding!';
+                }
+            } catch (e) {
+                document.getElementById('status-indicator').innerText = 'OFFLINE';
+                document.getElementById('status-indicator').className = 'status-badge status-maintenance';
+                document.getElementById('status-message').innerText = 'Unable to reach server.';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', fetchAppData);
+    </script>
+</body>
+</html>
