@@ -1,0 +1,11 @@
+v1.1.0 - Mise à jour de Personnalisation
+-------------------------------------------
+- Ajout de 10 catégories de mods dédiées : Antenna, Banner, Body, Boost, Boost Audio, Decal, Goal Explosion, Hat, Trail, et Wheels.
+- Remplacement des cases à cocher par des boutons radio pour limiter la sélection à un seul mod par catégorie, évitant ainsi les bugs visuels et les conflits de fichiers.
+- Refonte de l'interface utilisateur pour un design plus épuré et moderne.
+- Optimisation du code de base pour des lancements plus rapides et de meilleures performances.
+
+v1.0.0 - Lancement Initial
+-------------------------------------------
+- Sortie de la fonctionnalité principale du gestionnaire de mods.
+- Implémentation du système de mise à jour automatique pour garantir aux utilisateurs d'avoir toujours la dernière version de l'application.

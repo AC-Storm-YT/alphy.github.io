@@ -1,11 +1,11 @@
-v1.1.0 - The Foundation Update
+v1.1.0 - The Customization Update
 -------------------------------------------
-- Added automated version locking to prevent crashes after Rocket League updates.
-- Implemented automatic backup system for all original .upk game files.
-- Improved the automatic generation of the 'mods' folder structure upon first launch.
-- Major UI improvements for the main dashboard.
+- Added 10 dedicated mod categories: Antenna, Banner, Body, Boost, Boost Audio, Decal, Goal Explosion, Hat, Trail, and Wheels.
+- Switched mod selection from checkboxes to radio buttons to ensure only one mod is active per category, preventing visual bugs and file conflicts.
+- Redesigned the user interface for a cleaner, more modern look.
+- Optimized core code for faster launch times and smoother performance.
 
 v1.0.0 - Initial Release
 -------------------------------------------
 - Core mod manager functionality released.
-- Support for safe, external cosmetic and audio asset swapping.
+- Implemented the automated update system to ensure users always have the latest app version.
