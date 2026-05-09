@@ -1,6 +1,6 @@
 v1.2.0 - The Integrity & Sync Update
 -------------------------------------------
-- Added 1 dedicated mod categories: Paint.
+- Added 1 dedicated mod categorie: Paint.
 - Implemented MD5 hashing to verify file integrity. The app now compares game files, mods, and backups to ensure original game files are never accidentally overwritten by modded versions.
 - Active mods are now "sealed" with unique digital fingerprints in your settings. If the game launcher resets your files during an update, Alphy detects the change and automatically disables affected mods to prevent game crashes.
 - Added logic to detect Rocket League version changes. The app automatically synchronizes and updates your vanilla backups when a patch is detected, ensuring a fresh "return to vanilla" point.
