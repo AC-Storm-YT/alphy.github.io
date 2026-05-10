@@ -373,6 +373,7 @@
             <div class="nav-links">
                 <button onclick="navigate('home')" id="nav-home" class="active" data-i18n="navHome">Home</button>
                 <button onclick="navigate('guide')" id="nav-guide" data-i18n="navGuide">How it Works</button>
+                <button onclick="navigate('showcase')" id="nav-showcase" data-i18n="navShowcase">Showcase</button>
                 <button onclick="navigate('patch')" id="nav-patch" data-i18n="navPatch">Patch Notes</button>
                 <button onclick="navigate('qa')" id="nav-qa" data-i18n="navQa">Q&A</button>
                 <button onclick="navigate('status')" id="nav-status" data-i18n="navStatus">Status</button>
@@ -443,7 +444,6 @@
                         <div class="folder-tag">Goal Explosion</div>
                         <div class="folder-tag">Hat</div>
                         <div class="folder-tag">Trail</div>
-                        <div class="folder-tag">Paint</div>
                         <div class="folder-tag">Wheels</div>
                     </div>
                 </div>
@@ -463,6 +463,21 @@
                     <h3 data-i18n="step4Title">Automatic Backup & Launch</h3>
                     <p data-i18n="step4Text">Restart or launch Alphy. The app will immediately detect the new mod file and identify which vanilla game file needs to be replaced. Before making any changes, it safely copies your original game file to:<br><code>%appdata%\Alphy\Backups\Body_Octane_SF.upk.bak</code><br>Once the backup is secured, Alphy applies the mod and you are ready to play!</p>
                 </div>
+            </div>
+        </div>
+
+        <div id="showcase" class="page">
+            <h2 style="font-size: 2.5rem; margin-bottom: 3rem;" data-i18n="showcaseTitle">Showcase</h2>
+            <div class="card" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+                <p style="margin-bottom: 2rem; color: var(--text-muted);" data-i18n="showcaseText">Watch Alphy in action and see how easy it is to manage your custom Rocket League mods.</p>
+                
+                <div style="width: 100%; max-width: 800px; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px -5px rgba(0,0,0,0.5); background-color: #000;">
+                    <video width="100%" height="100%" controls poster="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/showcase/thumbnail_1.png" style="display: block;">
+                        <source src="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/showcase/alphy_1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
             </div>
         </div>
 
@@ -508,7 +523,7 @@
 
             <div class="card">
                 <h3 data-i18n="qa6Title">6. Where can I find mods to install?</h3>
-                <p data-i18n="qa6Text">Since Alphy does not include mods, you can find custom cosmetics created by the community in dedicated modding Discord servers, such as <a href='https://discord.gg/snJdP3cduG' target='_blank' style='color: #60a5fa; text-decoration: underline;'>TitleWave Beta</a> the official server.</p>
+                <p data-i18n="qa6Text">Since Alphy does not include mods, you can find custom cosmetics created by the community in dedicated modding Discord servers, such as <a href='https://discord.gg/A2mrCVdpPw' target='_blank' style='color: #60a5fa; text-decoration: underline;'>TitleWave Beta</a> the official server.</p>
             </div>
 
             <div class="card">
@@ -560,7 +575,7 @@
 
         const translations = {
             en: {
-                navHome: "Home", navGuide: "How it Works", navPatch: "Patch Notes", navQa: "Q&A", navStatus: "Status", navContact: "Contact",
+                navHome: "Home", navGuide: "How it Works", navShowcase: "Showcase", navPatch: "Patch Notes", navQa: "Q&A", navStatus: "Status", navContact: "Contact",
                 heroTitle: "Elevate Your Game.", heroSub: "The ultimate manager for custom mods.", btnDownload: "Download for Windows",
                 lblAppVer: "ALPHY VERSION", lblGameVer: "GAME VERSION SUPPORTED",
                 card1Title: "Safe & External Management", card1Text: "Alphy operates completely outside of game memory, ensuring zero injection and maximum safety. Simply select your mods, and the app instantly secures your original game files with automated backups before any changes take place. One click to apply, one click to restore.",
@@ -570,6 +585,7 @@
                 step2Title: "The Mods Directory", step2Text: "Once you run the application, it will automatically generate a <code>mods</code> folder in the exact same location as the Alphy <code>.exe</code> file. Inside, you will find categorized sub-folders ready for your files:",
                 step3Title: "Adding a Mod", step3Text: "To install a new mod, navigate to the correct category, create a named folder for your mod, and drop the <code>.upk</code> file inside.<br><br>For example, if you want to replace the Octane body with a Fennec mod:<br><code>mods\\Body\\Fennec (Replaces Octane)\\Body_Octane_SF.upk</code>",
                 step4Title: "Automatic Backup & Launch", step4Text: "Restart or launch Alphy. The app will immediately detect the new mod file and identify which vanilla game file needs to be replaced. Before making any changes, it safely copies your original game file to:<br><code>%appdata%\\Alphy\\Backups\\Body_Octane_SF.upk.bak</code><br>Once the backup is secured, Alphy applies the mod and you are ready to play!",
+                showcaseTitle: "Showcase", showcaseText: "Watch Alphy in action and see how easy it is to manage your custom Rocket League mods.",
                 patchTitle: "Patch Notes",
                 qaTitle: "Q&A",
                 qa1Title: "1. What is Alphy?", qa1Text: "Alphy is a free, external mod manager built for Rocket League. It lets you easily apply custom cosmetics—like car bodies, decals, and goal explosions—by managing your local game files. It handles all the technical work for you, instantly swapping mods in and out while keeping your original game files safely backed up.",
@@ -578,7 +594,7 @@
                 qa3Title: "3. Is Alphy free?", qa3Text: "Yes, it is completely free and will never become paid software. We also do not accept donations, as the app requires files from another source to be useful, and we feel it wouldn't be right to accept money for it.",
                 qa4Title: "4. Does Alphy work on console?", qa4Text: "No. Alphy requires access to PC game directories and local files, meaning it is only available for Windows.",
                 qa5Title: "5. Does Alphy come with pre-installed mods?", qa5Text: "No. Alphy is strictly a mod manager. We do not distribute or host any proprietary game assets or `.upk` files within the application. You must acquire the cosmetic files yourself and use Alphy to apply them to your game.",
-                qa6Title: "6. Where can I find mods to install?", qa6Text: "Since Alphy does not include mods, you can find custom cosmetics created by the community in dedicated modding Discord servers, such as <a href='https://discord.gg/snJdP3cduG' target='_blank' style='color: #60a5fa; text-decoration: underline;'>TitleWave Beta</a> the official server.",
+                qa6Title: "6. Where can I find mods to install?", qa6Text: "Since Alphy does not include mods, you can find custom cosmetics created by the community in dedicated modding Discord servers, such as <a href='https://discord.gg/A2mrCVdpPw' target='_blank' style='color: #60a5fa; text-decoration: underline;'>TitleWave Beta</a> the official server.",
                 qa7Title: "7. Can other players see my mods?", qa7Text: "No. Because Alphy modifies local `.upk` files on your hard drive, the custom cosmetics are client-side only. Other players will see the default vanilla car you have equipped.",
                 qa8Title: "8. Does it make automatic backups?", qa8Text: "Always. The moment you apply a mod, Alphy clones your original game files into a secure vault in your AppData folder. You can revert to a clean, vanilla installation instantly through the app interface without ever touching your game folders manually.",
                 qa9Title: "9. How does version locking work?", qa9Text: "To prevent game crashes after a Rocket League update, Alphy cross-references your game version with our supported version. If a mismatch is detected, the app locks modding features until we verify compatibility.",
@@ -591,7 +607,7 @@
                 toggleBtn: "FR"
             },
             fr: {
-                navHome: "Accueil", navGuide: "Tutoriel", navPatch: "Notes de version", navQa: "FAQ", navStatus: "Statut", navContact: "Contact",
+                navHome: "Accueil", navGuide: "Tutoriel", navShowcase: "Vidéos", navPatch: "Notes de version", navQa: "FAQ", navStatus: "Statut", navContact: "Contact",
                 heroTitle: "Élevez Votre Jeu.", heroSub: "Le gestionnaire ultime pour vos mods personnalisés.", btnDownload: "Télécharger pour Windows",
                 lblAppVer: "VERSION D'ALPHY", lblGameVer: "VERSION DU JEU SUPPORTÉE",
                 card1Title: "Gestion Externe et Sécurisée", card1Text: "Alphy fonctionne complètement en dehors de la mémoire du jeu, garantissant aucune injection et une sécurité maximale. Sélectionnez simplement vos mods, et l'application sécurise instantanément vos fichiers de jeu originaux avec des sauvegardes automatiques avant toute modification. Un clic pour appliquer, un clic pour restaurer.",
@@ -601,6 +617,7 @@
                 step2Title: "Le répertoire des Mods", step2Text: "Une fois l'application lancée, elle générera automatiquement un dossier <code>mods</code> au même emplacement que le fichier <code>.exe</code> d'Alphy. À l'intérieur, vous trouverez des sous-dossiers catégorisés prêts pour vos fichiers :",
                 step3Title: "Ajouter un Mod", step3Text: "Pour installer un nouveau mod, naviguez vers la catégorie correspondante, créez un dossier nommé pour votre mod, et déposez le fichier <code>.upk</code> à l'intérieur.<br><br>Par exemple, si vous souhaitez remplacer la carrosserie Octane par un mod Fennec :<br><code>mods\\Body\\Fennec (Replaces Octane)\\Body_Octane_SF.upk</code>",
                 step4Title: "Sauvegarde Automatique & Lancement", step4Text: "Redémarrez ou lancez Alphy. L'application détectera immédiatement le nouveau fichier mod et identifiera quel fichier de jeu original doit être remplacé. Avant de faire le moindre changement, elle copie en toute sécurité votre fichier de jeu original vers :<br><code>%appdata%\\Alphy\\Backups\\Body_Octane_SF.upk.bak</code><br>Une fois la sauvegarde sécurisée, Alphy applique le mod et vous êtes prêt à jouer !",
+                showcaseTitle: "Vidéos", showcaseText: "Regardez Alphy en action et découvrez à quel point il est facile de gérer vos mods Rocket League.",
                 patchTitle: "Notes de version",
                 qaTitle: "FAQ",
                 qa1Title: "1. Qu'est-ce qu'Alphy ?", qa1Text: "Alphy est un gestionnaire de mods gratuit et externe créé pour Rocket League. Il vous permet d'appliquer facilement des cosmétiques personnalisés (carrosseries, stickers, explosions de but) en gérant vos fichiers de jeu locaux. Il s'occupe de tout l'aspect technique à votre place, appliquant ou retirant les mods instantanément tout en conservant une sauvegarde sécurisée de vos fichiers d'origine.",
@@ -609,7 +626,7 @@
                 qa3Title: "3. Est-ce qu'Alphy est gratuit ?", qa3Text: "Oui, il est 100 % gratuit et ne deviendra jamais un logiciel payant. Nous n'acceptons pas non plus les dons, car l'application nécessite des fichiers provenant d'une autre source pour être utile, et nous estimons qu'il ne serait pas correct d'accepter de l'argent pour cela.",
                 qa4Title: "4. Est-ce qu'Alphy fonctionne sur console ?", qa4Text: "Non. Alphy nécessite d'accéder aux répertoires du jeu sur PC et aux fichiers locaux, ce qui signifie qu'il n'est disponible que pour Windows.",
                 qa5Title: "5. Alphy inclut-il des mods pré-installés ?", qa5Text: "Non. Alphy est strictement un gestionnaire de mods. Nous ne distribuons ni n'hébergeons aucun fichier de jeu propriétaire ou fichier `.upk` dans l'application. Vous devez acquérir les mods cosmétiques vous-même et utiliser Alphy pour les appliquer à votre jeu.",
-                qa6Title: "6. Où puis-je trouver des mods à installer ?", qa6Text: "Comme Alphy n'inclut pas de mods, vous pouvez trouver des cosmétiques personnalisés créés par la communauté dans des serveurs Discord dédiés au modding, comme le serveur officiel <a href='https://discord.gg/snJdP3cduG' target='_blank' style='color: #60a5fa; text-decoration: underline;'>TitleWave Beta</a>.",
+                qa6Title: "6. Où puis-je trouver des mods à installer ?", qa6Text: "Comme Alphy n'inclut pas de mods, vous pouvez trouver des cosmétiques personnalisés créés par la communauté dans des serveurs Discord dédiés au modding, comme le serveur officiel <a href='https://discord.gg/A2mrCVdpPw' target='_blank' style='color: #60a5fa; text-decoration: underline;'>TitleWave Beta</a>.",
                 qa7Title: "7. Est-ce que les autres joueurs peuvent voir mes mods ?", qa7Text: "Non. Comme Alphy modifie les fichiers `.upk` locaux sur votre disque dur, les cosmétiques personnalisés sont uniquement visibles de votre côté (client-side). Les autres joueurs verront la voiture de base que vous avez équipée.",
                 qa8Title: "8. Fait-il des sauvegardes automatiques ?", qa8Text: "Toujours. Au moment où vous appliquez un mod, Alphy clone vos fichiers de jeu originaux dans un coffre-fort sécurisé de votre dossier AppData. Vous pouvez revenir à une installation propre et originale instantanément via l'interface de l'application, sans jamais avoir à manipuler vos dossiers de jeu manuellement.",
                 qa9Title: "9. Comment fonctionne le verrouillage de version ?", qa9Text: "Pour éviter les plantages du jeu après une mise à jour de Rocket League, Alphy croise la version de votre jeu avec notre version supportée. Si une incohérence est détectée, l'application verrouille les fonctionnalités de modding jusqu'à ce que nous vérifiions la compatibilité.",
