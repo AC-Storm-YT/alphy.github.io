@@ -1,3 +1,9 @@
+v1.3.0 - The Import & Removal Update
+-------------------------------------------
+- Built-in Mod Importer: Added a brand new wizard to import mods directly into Alphy. Users can now select their downloaded files (supports both .upk and .bnk), pick a category, and specify what item it replaces. Alphy automatically builds the correct folder structure in the background.
+- Dedicated Mod Removal Tool: Added a safe and easy way to permanently delete mods without ever opening Windows File Explorer. Includes category filtering and a convenient "Select All" toggle for mass deletion.
+- Dashboard UI Update: Reorganized the main interface to seamlessly accommodate the new "Import New Mod" and "Remove Mods" tools alongside the existing save and update features.
+
 v1.2.1 - The UI & Stability Patch
 -------------------------------------------
 - New Navigation Drawer: Replaced the standard tabs with a sleek, modern side-drawer for much easier navigation across all categories.
