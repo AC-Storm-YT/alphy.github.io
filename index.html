@@ -16,6 +16,7 @@
             --text-color: #f8f9fa;
             --text-muted: #94a3b8;
             --success: #10b981;
+            --warning: #f59e0b; /* Amber warning color */
             --danger: #ef4444;
             --primary-color: #0078D4;
         }
@@ -220,6 +221,23 @@
 
         .card h3 { font-size: 1.5rem; margin-top: 0; color: #fff; }
         .card p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 0; }
+
+        /* Warning Bubble CSS */
+        .warning-bubble {
+            background-color: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1.2rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+        
+        .warning-bubble strong {
+            color: var(--warning);
+            display: inline-block;
+            margin-bottom: 0.3rem;
+        }
 
         .step-card {
             display: flex;
@@ -456,6 +474,11 @@
             <div class="card">
                 <h3 data-i18n="qa1Title">Is Alphy safe to use?</h3>
                 <p data-i18n="qa1Text">Yes. The mods loaded by Alphy are created using <a href='https://github.com/CrunchyRL/RLUPKTools' target='_blank' style='color: #60a5fa; text-decoration: underline;'>RLUPKTools</a>, a utility that edits Unreal Engine Package (<code>.upk</code>) files. This means Alphy operates as a straightforward file manager. Instead of injecting code into your computer's memory while the game is running, Alphy simply swaps cosmetic assets—like 3D models and textures—on your hard drive before you even launch the game. Because it performs local file replacements rather than active memory editing, it does not trigger anti-cheat software.</p>
+                
+                <div class="warning-bubble">
+                    <strong data-i18n="disclaimerTitle">Disclaimer:</strong> 
+                    <span data-i18n="disclaimerText">Users modify their game at their own risk. While this method has proven safe so far, we cannot be held responsible for any potential account bans.</span>
+                </div>
             </div>
 
             <div class="card">
@@ -519,6 +542,7 @@
                 patchTitle: "Patch Notes",
                 qaTitle: "Q&A",
                 qa1Title: "Is Alphy safe to use?", qa1Text: "Yes. The mods loaded by Alphy are created using <a href='https://github.com/CrunchyRL/RLUPKTools' target='_blank' style='color: #60a5fa; text-decoration: underline;'>RLUPKTools</a>, a utility that edits Unreal Engine Package (<code>.upk</code>) files. This means Alphy operates as a straightforward file manager. Instead of injecting code into your computer's memory while the game is running, Alphy simply swaps cosmetic assets—like 3D models and textures—on your hard drive before you even launch the game. Because it performs local file replacements rather than active memory editing, it does not trigger anti-cheat software.",
+                disclaimerTitle: "Disclaimer:", disclaimerText: "Users modify their game at their own risk. While this method has proven safe so far, we cannot be held responsible for any potential account bans in the future.",
                 qa2Title: "Does it make automatic backups?", qa2Text: "Always. The moment you apply a mod, Alphy clones your original game files into a secure vault in your AppData folder. You can revert to a clean, vanilla installation instantly through the app interface without ever touching your game folders manually.",
                 qa3Title: "How does version locking work?", qa3Text: "To prevent game crashes after a Rocket League update, Alphy cross-references your game version with our supported version. If a mismatch is detected, the app locks modding features until we verify compatibility.",
                 qa4Title: "Is Alphy free?", qa4Text: "Yes, it is completely free and will never become paid software. We also do not accept donations, as the app requires files from another source to be useful, and we feel it wouldn't be right to accept money for it.",
@@ -543,6 +567,7 @@
                 patchTitle: "Notes de version",
                 qaTitle: "FAQ",
                 qa1Title: "Est-ce qu'Alphy est sûr à utiliser ?", qa1Text: "Oui. Les mods chargés par Alphy sont créés avec <a href='https://github.com/CrunchyRL/RLUPKTools' target='_blank' style='color: #60a5fa; text-decoration: underline;'>RLUPKTools</a>, un utilitaire qui modifie les fichiers Unreal Engine Package (<code>.upk</code>). Cela signifie qu'Alphy agit comme un simple gestionnaire de fichiers. Au lieu d'injecter du code dans la mémoire de votre ordinateur pendant que le jeu tourne, Alphy échange simplement des ressources cosmétiques—comme des modèles 3D et des textures—sur votre disque dur avant même que vous lanciez le jeu. Comme il effectue des remplacements de fichiers locaux plutôt que de modifier la mémoire active, il ne déclenche pas les logiciels anti-triche.",
+                disclaimerTitle: "Avertissement :", disclaimerText: "Les utilisateurs modifient leur jeu à leurs propres risques. Bien que cette méthode se soit avérée sûre jusqu'à présent, nous ne pouvons être tenus responsables d'éventuels bannissements de compte à l'avenir.",
                 qa2Title: "Fait-il des sauvegardes automatiques ?", qa2Text: "Toujours. Au moment où vous appliquez un mod, Alphy clone vos fichiers de jeu originaux dans un coffre-fort sécurisé de votre dossier AppData. Vous pouvez revenir à une installation propre et originale instantanément via l'interface de l'application, sans jamais avoir à manipuler vos dossiers de jeu manuellement.",
                 qa3Title: "Comment fonctionne le verrouillage de version ?", qa3Text: "Pour éviter les plantages du jeu après une mise à jour de Rocket League, Alphy croise la version de votre jeu avec notre version supportée. Si une incohérence est détectée, l'application verrouille les fonctionnalités de modding jusqu'à ce que nous vérifiions la compatibilité.",
                 qa4Title: "Est-ce qu'Alphy est gratuit ?", qa4Text: "Oui, il est 100 % gratuit et ne deviendra jamais un logiciel payant. Nous n'acceptons pas non plus les dons, car l'application nécessite des fichiers provenant d'une autre source pour être utile, et nous estimons qu'il ne serait pas correct d'accepter de l'argent pour cela.",
