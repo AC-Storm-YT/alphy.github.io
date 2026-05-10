@@ -1,3 +1,9 @@
+v1.2.1 - The UI & Stability Patch
+-------------------------------------------
+- New Navigation Drawer: Replaced the standard tabs with a sleek, modern side-drawer for much easier navigation across all 11 categories.
+- Fixed File Collisions: Implemented a "Two-Phase Save System" that prevents mods from accidentally overwriting each other when swapping between items that share the same base game file (e.g., Tunica and Dieci).
+- Eliminated Startup Freezes: Fixed the "Ghost Window" bug. The app UI now boots instantly, while heavy file hashing and digital seal verifications run safely in the background.
+
 v1.2.0 - The Integrity & Sync Update
 -------------------------------------------
 - Added 1 dedicated mod categorie: Paint.
