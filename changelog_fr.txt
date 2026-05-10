@@ -1,3 +1,9 @@
+v1.2.1 - Patch d'Interface & Stabilité
+-------------------------------------------
+- Nouveau Tiroir de Navigation : Remplacement des onglets standards par un menu latéral élégant et moderne (menu hamburger) basé sur Material Design pour une navigation beaucoup plus facile parmi les 11 catégories.
+- Correction des Collisions de Fichiers : Implémentation d'un "Système de Sauvegarde en Deux Phases" qui empêche les mods de s'écraser accidentellement lors du basculement entre des éléments partageant le même fichier de jeu de base (ex: Tunica et Dieci).
+- Élimination des Gels au Démarrage : Correction du bug de la "Fenêtre Fantôme". L'interface de l'application démarre désormais instantanément, tandis que le hachage lourd des fichiers et les vérifications des sceaux numériques s'exécutent en toute sécurité en arrière-plan.
+
 v1.2.0 - Mise à Jour Intégrité & Synchro
 -------------------------------------------
 - Ajout d'une catégorie de mod dédiée : Paint.
