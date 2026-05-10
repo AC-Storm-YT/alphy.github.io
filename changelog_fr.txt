@@ -1,3 +1,9 @@
+v1.3.0 - Mise à Jour Importation & Suppression
+-------------------------------------------
+- Importateur de Mods Intégré : Ajout d'un tout nouvel assistant pour importer des mods directement dans Alphy. Les utilisateurs peuvent désormais sélectionner leurs fichiers téléchargés (supporte .upk et .bnk), choisir une catégorie et spécifier l'élément remplacé. Alphy génère automatiquement la structure de dossiers correcte en arrière-plan.
+- Outil de Suppression Dédié : Ajout d'un moyen sûr et facile de supprimer définitivement des mods sans jamais ouvrir l'Explorateur de fichiers Windows. Comprend un filtrage par catégorie et un bouton pratique "Tout Sélectionner" pour les suppressions en masse.
+- Mise à Jour de l'Interface : Réorganisation du tableau de bord principal pour intégrer parfaitement les nouveaux outils "Importer" et "Supprimer" aux côtés des fonctionnalités de sauvegarde et de mise à jour existantes.
+
 v1.2.1 - Patch d'Interface & Stabilité
 -------------------------------------------
 - Nouveau Tiroir de Navigation : Remplacement des onglets standards par un menu latéral élégant et moderne pour une navigation beaucoup plus facile parmi les catégories.
