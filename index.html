@@ -403,7 +403,7 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="https://github.com/AC-Storm-YT/alphy.github.io/blob/main/preview/alphy1.2.1_preview.png?raw=true" alt="Alphy Preview">
+                    <img src="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/preview/alphy1.3.0_preview.png" alt="Alphy Preview">
                 </div>
             </div>
             
@@ -416,11 +416,6 @@
         <div id="guide" class="page">
             <h2 style="font-size: 2.5rem; margin-bottom: 2rem;" data-i18n="guideTitle">How it Works</h2>
 
-            <div class="warning-bubble" style="margin-bottom: 3rem; margin-top: 0;">
-                <strong data-i18n="guideDisclaimerTitle">Development Notice:</strong> 
-                <span data-i18n="guideDisclaimerText">This process is currently a work in progress. It is in our plans to integrate a way to browse and add mods directly inside the app to make it much easier in the future!</span>
-            </div>
-
             <div class="card step-card">
                 <div class="step-number">1</div>
                 <div class="step-content">
@@ -432,8 +427,39 @@
             <div class="card step-card">
                 <div class="step-number">2</div>
                 <div class="step-content">
-                    <h3 data-i18n="step2Title">The Mods Directory</h3>
-                    <p data-i18n="step2Text">Once you run the application, it will automatically generate a <code>mods</code> folder in the exact same location as the Alphy <code>.exe</code> file. Inside, you will find categorized sub-folders ready for your files:</p>
+                    <h3 data-i18n="step2Title">Import a Mod</h3>
+                    <p data-i18n="step2Text">Click the <strong>Import new mod</strong> button. Use the file selector at the bottom right to choose your <code>.upk</code> mod file. Enter the name of your mod (e.g., <em>Porsche 911 GT3 RS</em>), type the item it replaces (e.g., <em>Hotshot</em>), and select the correct category (e.g., <em>Body</em>). Finally, click <strong>Add mod</strong>.</p>
+                    <img src="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/preview/importmod_preview.png" style="width: 100%; max-width: 650px; border-radius: 8px; margin-top: 1.5rem; border: 1px solid var(--glass-border); display: block;" alt="Import Mod Preview">
+                </div>
+            </div>
+
+            <div class="card step-card">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3 data-i18n="step3Title">Select & Apply Mods</h3>
+                    <p data-i18n="step3Text">Click the three horizontal lines at the top left to change categories. Select the mods you want to equip, then click the save button at the bottom right. Alphy will automatically back up your original game files and apply the changes before you launch the game!</p>
+                    <img src="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/preview/alphy1.3.0_preview.png" style="width: 100%; max-width: 650px; border-radius: 8px; margin-top: 1.5rem; border: 1px solid var(--glass-border); display: block;" alt="Apply Mod Preview">
+                </div>
+            </div>
+
+            <div class="card step-card" style="margin-bottom: 3rem;">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3 data-i18n="step4Title">Remove Mods</h3>
+                    <p data-i18n="step4Text">To uninstall, click the <strong>Remove mods</strong> button. Select a category from the dropdown menu to view your installed mods. You can select a single mod, multiple mods, or all of them at once. Click <strong>Remove selected</strong> to instantly restore your original game files.</p>
+                    <img src="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/preview/removemod_preview.png" style="width: 100%; max-width: 650px; border-radius: 8px; margin-top: 1.5rem; border: 1px solid var(--glass-border); display: block;" alt="Remove Mod Preview">
+                </div>
+            </div>
+            
+            <hr style="border-color: var(--glass-border); margin: 4rem 0;">
+            
+            <h2 style="font-size: 2rem; margin-bottom: 2rem;" data-i18n="altTitle">Alternative: Manual Installation</h2>
+
+            <div class="card step-card">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3 data-i18n="altStep1Title">The Mods Directory</h3>
+                    <p data-i18n="altStep1Text">If you prefer not to use the UI, Alphy automatically generates a <code>mods</code> folder in the exact same location as the <code>.exe</code> file. Inside, you will find categorized sub-folders ready for your files:</p>
                     <div class="folder-grid">
                         <div class="folder-tag">Antenna</div>
                         <div class="folder-tag">Banner</div>
@@ -450,20 +476,21 @@
             </div>
 
             <div class="card step-card">
-                <div class="step-number">3</div>
+                <div class="step-number">2</div>
                 <div class="step-content">
-                    <h3 data-i18n="step3Title">Adding a Mod</h3>
-                    <p data-i18n="step3Text">To install a new mod, navigate to the correct category, create a named folder for your mod, and drop the <code>.upk</code> file inside.<br><br>For example, if you want to replace the Octane body with a Fennec mod:<br><code>mods\Body\Fennec (Replaces Octane)\Body_Octane_SF.upk</code></p>
+                    <h3 data-i18n="altStep2Title">Adding a Mod Manually</h3>
+                    <p data-i18n="altStep2Text">To install a new mod manually, navigate to the correct category, create a named folder for your mod, and drop the <code>.upk</code> file inside.<br><br>For example, if you want to replace the Octane body with a Fennec mod:<br><code>mods\Body\Fennec (Replaces Octane)\Body_Octane_SF.upk</code></p>
                 </div>
             </div>
 
             <div class="card step-card">
-                <div class="step-number">4</div>
+                <div class="step-number">3</div>
                 <div class="step-content">
-                    <h3 data-i18n="step4Title">Automatic Backup & Launch</h3>
-                    <p data-i18n="step4Text">Restart or launch Alphy. The app will immediately detect the new mod file and identify which vanilla game file needs to be replaced. Before making any changes, it safely copies your original game file to:<br><code>%appdata%\Alphy\Backups\Body_Octane_SF.upk.bak</code><br>Once the backup is secured, Alphy applies the mod and you are ready to play!</p>
+                    <h3 data-i18n="altStep3Title">Automatic Backup</h3>
+                    <p data-i18n="altStep3Text">Restart or launch Alphy. The app will immediately detect the new manual mod files. When you apply them, it safely copies your original game file to:<br><code>%appdata%\Alphy\Backups\Body_Octane_SF.upk.bak</code></p>
                 </div>
             </div>
+
         </div>
 
         <div id="showcase" class="page">
@@ -580,11 +607,14 @@
                 lblAppVer: "ALPHY VERSION", lblGameVer: "GAME VERSION SUPPORTED",
                 card1Title: "Safe & External Management", card1Text: "Alphy operates completely outside of game memory, ensuring zero injection and maximum safety. Simply select your mods, and the app instantly secures your original game files with automated backups before any changes take place. One click to apply, one click to restore.",
                 guideTitle: "How it Works",
-                guideDisclaimerTitle: "Development Notice:", guideDisclaimerText: "This process is currently a work in progress. It is in our plans to integrate a way to browse and add mods directly inside the app to make it much easier in the future!",
                 step1Title: "Select Game Folder", step1Text: "When you run Alphy for the first time, you will be prompted to select your Rocket League installation folder. This target folder must be named <code>rocketleague</code>. For example: <code>D:\\EG\\rocketleague</code>.",
-                step2Title: "The Mods Directory", step2Text: "Once you run the application, it will automatically generate a <code>mods</code> folder in the exact same location as the Alphy <code>.exe</code> file. Inside, you will find categorized sub-folders ready for your files:",
-                step3Title: "Adding a Mod", step3Text: "To install a new mod, navigate to the correct category, create a named folder for your mod, and drop the <code>.upk</code> file inside.<br><br>For example, if you want to replace the Octane body with a Fennec mod:<br><code>mods\\Body\\Fennec (Replaces Octane)\\Body_Octane_SF.upk</code>",
-                step4Title: "Automatic Backup & Launch", step4Text: "Restart or launch Alphy. The app will immediately detect the new mod file and identify which vanilla game file needs to be replaced. Before making any changes, it safely copies your original game file to:<br><code>%appdata%\\Alphy\\Backups\\Body_Octane_SF.upk.bak</code><br>Once the backup is secured, Alphy applies the mod and you are ready to play!",
+                step2Title: "Import a Mod", step2Text: "Click the <strong>Import new mod</strong> button. Use the file selector at the bottom right to choose your <code>.upk</code> mod file. Enter the name of your mod (e.g., <em>Porsche 911 GT3 RS</em>), type the item it replaces (e.g., <em>Hotshot</em>), and select the correct category (e.g., <em>Body</em>). Finally, click <strong>Add mod</strong>.",
+                step3Title: "Select & Apply Mods", step3Text: "Click the three horizontal lines at the top left to change categories. Select the mods you want to equip, then click the save button at the bottom right. Alphy will automatically back up your original game files and apply the changes before you launch the game!",
+                step4Title: "Remove Mods", step4Text: "To uninstall, click the <strong>Remove mods</strong> button. Select a category from the dropdown menu to view your installed mods. You can select a single mod, multiple mods, or all of them at once. Click <strong>Remove selected</strong> to instantly restore your original game files.",
+                altTitle: "Alternative: Manual Installation",
+                altStep1Title: "The Mods Directory", altStep1Text: "If you prefer not to use the UI, Alphy automatically generates a <code>mods</code> folder in the exact same location as the <code>.exe</code> file. Inside, you will find categorized sub-folders ready for your files:",
+                altStep2Title: "Adding a Mod Manually", altStep2Text: "To install a new mod manually, navigate to the correct category, create a named folder for your mod, and drop the <code>.upk</code> file inside.<br><br>For example, if you want to replace the Octane body with a Fennec mod:<br><code>mods\\Body\\Fennec (Replaces Octane)\\Body_Octane_SF.upk</code>",
+                altStep3Title: "Automatic Backup", altStep3Text: "Restart or launch Alphy. The app will immediately detect the new manual mod files. When you apply them, it safely copies your original game file to:<br><code>%appdata%\\Alphy\\Backups\\Body_Octane_SF.upk.bak</code>",
                 showcaseTitle: "Showcase", showcaseText: "Watch Alphy in action and see how easy it is to manage your custom Rocket League mods.",
                 patchTitle: "Patch Notes",
                 qaTitle: "Q&A",
@@ -612,11 +642,14 @@
                 lblAppVer: "VERSION D'ALPHY", lblGameVer: "VERSION DU JEU SUPPORTÉE",
                 card1Title: "Gestion Externe et Sécurisée", card1Text: "Alphy fonctionne complètement en dehors de la mémoire du jeu, garantissant aucune injection et une sécurité maximale. Sélectionnez simplement vos mods, et l'application sécurise instantanément vos fichiers de jeu originaux avec des sauvegardes automatiques avant toute modification. Un clic pour appliquer, un clic pour restaurer.",
                 guideTitle: "Comment ça marche",
-                guideDisclaimerTitle: "Note de Développement :", guideDisclaimerText: "Ce processus est encore en cours d'amélioration. Nous prévoyons d'intégrer un système pour parcourir et ajouter des mods directement depuis l'application afin de faciliter grandement les choses à l'avenir !",
                 step1Title: "Sélectionner le dossier du jeu", step1Text: "Lorsque vous lancez Alphy pour la première fois, il vous sera demandé de sélectionner le dossier d'installation de Rocket League. Ce dossier cible doit être nommé <code>rocketleague</code>. Par exemple : <code>D:\\EG\\rocketleague</code>.",
-                step2Title: "Le répertoire des Mods", step2Text: "Une fois l'application lancée, elle générera automatiquement un dossier <code>mods</code> au même emplacement que le fichier <code>.exe</code> d'Alphy. À l'intérieur, vous trouverez des sous-dossiers catégorisés prêts pour vos fichiers :",
-                step3Title: "Ajouter un Mod", step3Text: "Pour installer un nouveau mod, naviguez vers la catégorie correspondante, créez un dossier nommé pour votre mod, et déposez le fichier <code>.upk</code> à l'intérieur.<br><br>Par exemple, si vous souhaitez remplacer la carrosserie Octane par un mod Fennec :<br><code>mods\\Body\\Fennec (Replaces Octane)\\Body_Octane_SF.upk</code>",
-                step4Title: "Sauvegarde Automatique & Lancement", step4Text: "Redémarrez ou lancez Alphy. L'application détectera immédiatement le nouveau fichier mod et identifiera quel fichier de jeu original doit être remplacé. Avant de faire le moindre changement, elle copie en toute sécurité votre fichier de jeu original vers :<br><code>%appdata%\\Alphy\\Backups\\Body_Octane_SF.upk.bak</code><br>Une fois la sauvegarde sécurisée, Alphy applique le mod et vous êtes prêt à jouer !",
+                step2Title: "Importer un Mod", step2Text: "Cliquez sur le bouton <strong>Import new mod</strong>. Utilisez le sélecteur de fichier en bas à droite pour choisir votre fichier <code>.upk</code>. Entrez le nom de votre mod (ex: <em>Porsche 911 GT3 RS</em>), l'objet qu'il remplace (ex: <em>Hotshot</em>), et sélectionnez la catégorie (ex: <em>Body</em>). Enfin, cliquez sur <strong>Add mod</strong>.",
+                step3Title: "Sélectionner et Appliquer des Mods", step3Text: "Cliquez sur les trois lignes horizontales en haut à gauche pour changer de catégorie. Sélectionnez les mods que vous souhaitez équiper, puis cliquez sur le bouton de sauvegarde en bas à droite. Alphy sauvegardera automatiquement vos fichiers d'origine et appliquera les modifications avant que vous ne lanciez le jeu !",
+                step4Title: "Supprimer des Mods", step4Text: "Pour désinstaller, cliquez sur le bouton <strong>Remove mods</strong>. Sélectionnez une catégorie dans le menu déroulant pour voir vos mods installés. Vous pouvez sélectionner un seul mod, plusieurs, ou tous en même temps. Cliquez sur <strong>Remove selected</strong> pour restaurer instantanément vos fichiers d'origine.",
+                altTitle: "Alternative : Installation Manuelle",
+                altStep1Title: "Le répertoire des Mods", altStep1Text: "Si vous préférez ne pas utiliser l'interface, Alphy génère automatiquement un dossier <code>mods</code> au même emplacement que le fichier <code>.exe</code>. À l'intérieur, vous trouverez des sous-dossiers catégorisés :",
+                altStep2Title: "Ajouter un Mod Manuellement", altStep2Text: "Pour installer un nouveau mod manuellement, naviguez vers la catégorie correspondante, créez un dossier nommé pour votre mod, et déposez le fichier <code>.upk</code> à l'intérieur.<br><br>Par exemple :<br><code>mods\\Body\\Fennec (Replaces Octane)\\Body_Octane_SF.upk</code>",
+                altStep3Title: "Sauvegarde Automatique", altStep3Text: "Redémarrez ou lancez Alphy. L'application détectera immédiatement les nouveaux fichiers. Lors de l'application, elle copie en toute sécurité votre fichier original vers :<br><code>%appdata%\\Alphy\\Backups\\Body_Octane_SF.upk.bak</code>",
                 showcaseTitle: "Vidéos", showcaseText: "Regardez Alphy en action et découvrez à quel point il est facile de gérer vos mods Rocket League.",
                 patchTitle: "Notes de version",
                 qaTitle: "FAQ",
