@@ -1,6 +1,6 @@
 v1.2.1 - Patch d'Interface & Stabilité
 -------------------------------------------
-- Nouveau Tiroir de Navigation : Remplacement des onglets standards par un menu latéral élégant et moderne pour une navigation beaucoup plus facile parmi les 11 catégories.
+- Nouveau Tiroir de Navigation : Remplacement des onglets standards par un menu latéral élégant et moderne pour une navigation beaucoup plus facile parmi les catégories.
 - Correction des Collisions de Fichiers : Implémentation d'un "Système de Sauvegarde en Deux Phases" qui empêche les mods de s'écraser accidentellement lors du basculement entre des éléments partageant le même fichier de jeu de base (ex: Tunica et Dieci).
 - Élimination des Gels au Démarrage : Correction du bug de la "Fenêtre Fantôme". L'interface de l'application démarre désormais instantanément, tandis que le hachage lourd des fichiers et les vérifications des sceaux numériques s'exécutent en toute sécurité en arrière-plan.
 
