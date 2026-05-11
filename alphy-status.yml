@@ -1,0 +1,43 @@
+name: Alphy Status Monitor
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'lockdown.txt'
+
+jobs:
+  notify_discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Read lockdown status and send to Discord
+        env:
+          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          # Read the file and clean up the text
+          STATUS=$(cat lockdown.txt | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
+          
+          # Setup the embed based on true/false
+          if [ "$STATUS" == "true" ]; then
+            TITLE="⚠️ Alphy is in Lockdown"
+            DESCRIPTION="The application is currently locked. (Status: True)"
+            COLOR=16711680 # Red
+          elif [ "$STATUS" == "false" ]; then
+            TITLE="✅ Alphy is Online"
+            DESCRIPTION="The application is operating normally. (Status: False)"
+            COLOR=65280 # Green
+          else
+            TITLE="❓ Unknown Status"
+            DESCRIPTION="lockdown.txt was updated, but the status is unknown: $STATUS"
+            COLOR=8421504 # Gray
+          fi
+
+          # Send it to Discord
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d "{\"embeds\": [{\"title\": \"$TITLE\", \"description\": \"$DESCRIPTION\", \"color\": $COLOR}]}" \
+          $WEBHOOK_URL
