@@ -6,38 +6,56 @@ on:
       - main
     paths:
       - 'lockdown.txt'
+      - 'version.txt'
 
 jobs:
-  notify_discord:
+  update_discord_status:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Read lockdown status and send to Discord
+      - name: Read files and update Discord
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
+          MESSAGE_ID: "1503500652758827182"
         run: |
-          # Read the file and clean up the text
+          # Read lockdown status
           STATUS=$(cat lockdown.txt | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
           
-          # Setup the embed based on true/false
-          if [ "$STATUS" == "true" ]; then
-            TITLE="⚠️ Alphy is in Lockdown"
-            DESCRIPTION="The application is currently locked. (Status: True)"
-            COLOR=16711680 # Red
-          elif [ "$STATUS" == "false" ]; then
-            TITLE="✅ Alphy is Online"
-            DESCRIPTION="The application is operating normally. (Status: False)"
-            COLOR=65280 # Green
+          # Read version (Defaults to "Unknown" if the file is missing)
+          if [ -f "version.txt" ]; then
+            VERSION=$(cat version.txt | tr -d '\n' | tr -d '\r')
           else
-            TITLE="❓ Unknown Status"
-            DESCRIPTION="lockdown.txt was updated, but the status is unknown: $STATUS"
+            VERSION="Unknown"
+          fi
+          
+          # Setup the embed details based on the lockdown state
+          if [ "$STATUS" == "true" ]; then
+            # (Lockdown is TRUE -> MAINTENANCE/RED)
+            TITLE="⚠️ **MAINTENANCE**"
+            COLOR=16711680 # Red
+            SUBTITLE="__System Status__"
+            DETAIL="*The mod network is temporarily offline for upgrades.*"
+          elif [ "$STATUS" == "false" ]; then
+            # (Lockdown is FALSE -> OPERATIONAL/GREEN)
+            TITLE="✅ **OPERATIONAL**"
+            COLOR=65280 # Green
+            SUBTITLE="__System Status__"
+            DETAIL="*All systems are running normally. Happy modding!*"
+          else
+            # Unknown state fallback
+            TITLE="❓ **UNKNOWN**"
             COLOR=8421504 # Gray
+            SUBTITLE="__System Status__"
+            DETAIL="lockdown.txt was updated, but the status is unknown: $STATUS"
           fi
 
-          # Send it to Discord
+          # Construct the clean description, mimicking the website hierarchy and vertical spacing
+          DESCRIPTION="$TITLE\n\n# $SUBTITLE\n\n$DETAIL\n\n\n\n**Version:** $VERSION"
+
+          # Send PATCH request to edit the single existing message
           curl -H "Content-Type: application/json" \
-          -X POST \
-          -d "{\"embeds\": [{\"title\": \"$TITLE\", \"description\": \"$DESCRIPTION\", \"color\": $COLOR}]}" \
-          $WEBHOOK_URL
+          -X PATCH \
+          -d "{\"embeds\": [{\"description\": \"$DESCRIPTION\", \"color\": $COLOR}]}" \
+          "$WEBHOOK_URL/messages/$MESSAGE_ID"
