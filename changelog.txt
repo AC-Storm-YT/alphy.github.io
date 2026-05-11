@@ -1,3 +1,7 @@
+v1.3.1 - Backup System Adjustments
+-------------------------------------------
+- Made critical adjustments to the background backup system to ensure optimal stability and file integrity.
+
 v1.3.0 - The Import & Removal Update
 -------------------------------------------
 - Built-in Mod Importer: Added a brand new wizard to import mods directly into Alphy. Users can now select their downloaded files (supports both .upk and .bnk), pick a category, and specify what item it replaces. Alphy automatically builds the correct folder structure in the background.

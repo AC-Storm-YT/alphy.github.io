@@ -1,3 +1,7 @@
+v1.3.1 - Ajustements du Système de Sauvegarde
+-------------------------------------------
+- Ajustements apportés au système de sauvegarde en arrière-plan pour garantir une stabilité et une intégrité optimales des fichiers.
+
 v1.3.0 - Mise à Jour Importation & Suppression
 -------------------------------------------
 - Importateur de Mods Intégré : Ajout d'un tout nouvel assistant pour importer des mods directement dans Alphy. Les utilisateurs peuvent désormais sélectionner leurs fichiers téléchargés (supporte .upk et .bnk), choisir une catégorie et spécifier l'élément remplacé. Alphy génère automatiquement la structure de dossiers correcte en arrière-plan.
