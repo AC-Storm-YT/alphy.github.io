@@ -1,20 +1,20 @@
-v1.3.1 - Ajustements du Système de Sauvegarde
+v1.3.1 - Ajustements du Système de Sauvegarde - 11 mai 2026
 -------------------------------------------
 - Ajustements apportés au système de sauvegarde en arrière-plan pour garantir une stabilité et une intégrité optimales des fichiers.
 
-v1.3.0 - Mise à Jour Importation & Suppression
+v1.3.0 - Mise à Jour Importation & Suppression - 10 mai 2026
 -------------------------------------------
 - Importateur de Mods Intégré : Ajout d'un tout nouvel assistant pour importer des mods directement dans Alphy. Les utilisateurs peuvent désormais sélectionner leurs fichiers téléchargés (supporte .upk et .bnk), choisir une catégorie et spécifier l'élément remplacé. Alphy génère automatiquement la structure de dossiers correcte en arrière-plan.
 - Outil de Suppression Dédié : Ajout d'un moyen sûr et facile de supprimer définitivement des mods sans jamais ouvrir l'Explorateur de fichiers Windows. Comprend un filtrage par catégorie et un bouton pratique "Tout Sélectionner" pour les suppressions en masse.
 - Mise à Jour de l'Interface : Réorganisation du tableau de bord principal pour intégrer parfaitement les nouveaux outils "Importer" et "Supprimer" aux côtés des fonctionnalités de sauvegarde et de mise à jour existantes.
 
-v1.2.1 - Patch d'Interface & Stabilité
+v1.2.1 - Patch d'Interface & Stabilité - 10 mai 2026
 -------------------------------------------
 - Nouveau Tiroir de Navigation : Remplacement des onglets standards par un menu latéral élégant et moderne pour une navigation beaucoup plus facile parmi les catégories.
 - Correction des Collisions de Fichiers : Implémentation d'un "Système de Sauvegarde en Deux Phases" qui empêche les mods de s'écraser accidentellement lors du basculement entre des éléments partageant le même fichier de jeu de base (ex: Tunica et Dieci).
 - Élimination des Gels au Démarrage : Correction du bug de la "Fenêtre Fantôme". L'interface de l'application démarre désormais instantanément, tandis que le hachage lourd des fichiers et les vérifications des sceaux numériques s'exécutent en toute sécurité en arrière-plan.
 
-v1.2.0 - Mise à Jour Intégrité & Synchro
+v1.2.0 - Mise à Jour Intégrité & Synchro - 10 mai 2026
 -------------------------------------------
 - Ajout d'une catégorie de mod dédiée : Paint.
 - Implémentation du hachage MD5 pour vérifier l'intégrité des fichiers. L'application compare désormais les fichiers du jeu, les mods et les sauvegardes pour s'assurer que les fichiers originaux du jeu ne soient jamais écrasés par accident par des versions modifiées.
@@ -22,14 +22,14 @@ v1.2.0 - Mise à Jour Intégrité & Synchro
 - Ajout d'une logique pour détecter les changements de version de Rocket League. L'application synchronise et met à jour automatiquement vos sauvegardes originales (vanilla) lorsqu'un patch est détecté, garantissant un point de retour à l'original toujours frais.
 - Reprise du processus de validation au démarrage en tant que tâche de fond non bloquante, réduisant considérablement les gels au lancement et améliorant la réactivité de l'interface utilisateur.
 
-v1.1.0 - Mise à jour de Personnalisation
+v1.1.0 - Mise à jour de Personnalisation - 9 mai 2026
 -------------------------------------------
 - Ajout de 10 catégories de mods dédiées : Antenna, Banner, Body, Boost, Boost Audio, Decal, Goal Explosion, Hat, Trail, et Wheels.
 - Remplacement des cases à cocher par des boutons radio pour limiter la sélection à un seul mod par catégorie, évitant ainsi les bugs visuels et les conflits de fichiers.
 - Refonte de l'interface utilisateur pour un design plus épuré et moderne.
 - Optimisation du code de base pour des lancements plus rapides et de meilleures performances.
 
-v1.0.0 - Lancement Initial
+v1.0.0 - Lancement Initial - 9 mai 2026
 -------------------------------------------
 - Sortie de la fonctionnalité principale du gestionnaire de mods.
 - Implémentation du système de mise à jour automatique pour garantir aux utilisateurs d'avoir toujours la dernière version de l'application.
