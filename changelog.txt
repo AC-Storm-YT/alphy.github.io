@@ -1,20 +1,20 @@
-v1.3.1 - Backup System Adjustments
+v1.3.1 - Backup System Adjustments - May 11 2026
 -------------------------------------------
 - Made critical adjustments to the background backup system to ensure optimal stability and file integrity.
 
-v1.3.0 - The Import & Removal Update
+v1.3.0 - The Import & Removal Update - May 10 2026
 -------------------------------------------
 - Built-in Mod Importer: Added a brand new wizard to import mods directly into Alphy. Users can now select their downloaded files (supports both .upk and .bnk), pick a category, and specify what item it replaces. Alphy automatically builds the correct folder structure in the background.
 - Dedicated Mod Removal Tool: Added a safe and easy way to permanently delete mods without ever opening Windows File Explorer. Includes category filtering and a convenient "Select All" toggle for mass deletion.
 - Dashboard UI Update: Reorganized the main interface to seamlessly accommodate the new "Import New Mod" and "Remove Mods" tools alongside the existing save and update features.
 
-v1.2.1 - The UI & Stability Patch
+v1.2.1 - The UI & Stability Patch - May 10 2026
 -------------------------------------------
 - New Navigation Drawer: Replaced the standard tabs with a sleek, modern side-drawer for much easier navigation across all categories.
 - Fixed File Collisions: Implemented a "Two-Phase Save System" that prevents mods from accidentally overwriting each other when swapping between items that share the same base game file (e.g., Tunica and Dieci).
 - Eliminated Startup Freezes: Fixed the "Ghost Window" bug. The app UI now boots instantly, while heavy file hashing and digital seal verifications run safely in the background.
 
-v1.2.0 - The Integrity & Sync Update
+v1.2.0 - The Integrity & Sync Update - May 10 2026
 -------------------------------------------
 - Added 1 dedicated mod categorie: Paint.
 - Implemented MD5 hashing to verify file integrity. The app now compares game files, mods, and backups to ensure original game files are never accidentally overwritten by modded versions.
@@ -22,14 +22,14 @@ v1.2.0 - The Integrity & Sync Update
 - Added logic to detect Rocket League version changes. The app automatically synchronizes and updates your vanilla backups when a patch is detected, ensuring a fresh "return to vanilla" point.
 - Redesigned the startup validation process into a non-blocking background task, significantly reducing launch hangs and improving UI responsiveness.
 
-v1.1.0 - The Customization Update
+v1.1.0 - The Customization Update - May 9 2026
 -------------------------------------------
 - Added 10 dedicated mod categories: Antenna, Banner, Body, Boost, Boost Audio, Decal, Goal Explosion, Hat, Trail, and Wheels.
 - Switched mod selection from checkboxes to radio buttons to ensure only one mod is active per category, preventing visual bugs and file conflicts.
 - Redesigned the user interface for a cleaner, more modern look.
 - Optimized core code for faster launch times and smoother performance.
 
-v1.0.0 - Initial Release
+v1.0.0 - Initial Release - May 9 2026
 -------------------------------------------
 - Core mod manager functionality released.
 - Implemented the automated update system to ensure users always have the latest app version.
