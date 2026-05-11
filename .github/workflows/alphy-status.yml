@@ -20,17 +20,13 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
           MESSAGE_ID: "1503500652758827182"
         run: |
-          # Read lockdown status
           STATUS=$(cat lockdown.txt | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
           
-          # Read version (Defaults to "Unknown" if the file is missing)
           if [ -f "version.txt" ]; then
             VERSION=$(cat version.txt | tr -d '\n' | tr -d '\r')
           else
             VERSION="Unknown"
           fi
-          
-          # Setup the embed details based on the lockdown state
           if [ "$STATUS" == "true" ]; then
             # (Lockdown is TRUE -> MAINTENANCE/RED)
             TITLE="⚠️ **MAINTENANCE**"
@@ -44,17 +40,14 @@ jobs:
             SUBTITLE="__System Status__"
             DETAIL="*All systems are running normally. Happy modding!*"
           else
-            # Unknown state fallback
             TITLE="❓ **UNKNOWN**"
             COLOR=8421504 # Gray
             SUBTITLE="__System Status__"
             DETAIL="lockdown.txt was updated, but the status is unknown: $STATUS"
           fi
-
-          # Construct the clean description, mimicking the website hierarchy and vertical spacing
+          
           DESCRIPTION="$TITLE\n\n# $SUBTITLE\n\n$DETAIL\n\n\n\n**Version:** $VERSION"
-
-          # Send PATCH request to edit the single existing message
+          
           curl -H "Content-Type: application/json" \
           -X PATCH \
           -d "{\"embeds\": [{\"description\": \"$DESCRIPTION\", \"color\": $COLOR}]}" \
