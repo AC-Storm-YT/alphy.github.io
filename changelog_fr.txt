@@ -1,3 +1,7 @@
+v1.3.2 - Synchronisation Dynamique des Sauvegardes - 11 mai 2026
+-------------------------------------------
+- Correction d'un problème où les mods nouvellement importés ne déclenchaient pas la sauvegarde des fichiers originaux avant le redémarrage de l'application. Alphy synchronise et sauvegarde désormais instantanément les fichiers de jeu requis dès que vous importez ou supprimez un mod.
+
 v1.3.1 - Ajustements du Système de Sauvegarde - 11 mai 2026
 -------------------------------------------
 - Ajustements apportés au système de sauvegarde en arrière-plan pour garantir une stabilité et une intégrité optimales des fichiers.
