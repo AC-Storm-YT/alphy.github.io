@@ -321,6 +321,17 @@
             font-weight: 600;
         }
 
+        .patch-date {
+            margin-left: auto;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--glass-border);
+        }
+
         .patch-list {
             list-style: none;
             padding: 0;
@@ -362,6 +373,7 @@
             nav { flex-direction: column; gap: 1rem; }
             .lang-btn { margin-left: 0; }
             .patch-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+            .patch-date { margin-left: 0; margin-top: 0.5rem; }
         }
     </style>
 </head>
@@ -419,34 +431,47 @@
             <div class="card step-card">
                 <div class="step-number">1</div>
                 <div class="step-content">
-                    <h3 data-i18n="step1Title">Select Game Folder</h3>
-                    <p data-i18n="step1Text">When you run Alphy for the first time, you will be prompted to select your Rocket League installation folder. This target folder must be named <code>rocketleague</code>. For example: <code>D:\EG\rocketleague</code>.</p>
+                    <h3 data-i18n="step1Title">Disable Auto Updates</h3>
+                    <p data-i18n="step1Text">Before installing Alphy, you must disable auto-updates for Rocket League in the Epic Games Launcher. Click the three dots on the game tile, select <strong>Manage</strong>, and uncheck <strong>Auto Update</strong>. If you skip this step, Epic Games may verify your files and automatically remove your mods!</p>
+                    
+                    <div style="display: flex; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap; align-items: flex-start;">
+                        <img src="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/auto-update/rl_1.png" style="width: 100%; max-width: 250px; height: auto; border-radius: 8px; border: 1px solid var(--glass-border);" alt="Epic Games 3 Dots">
+                        <img src="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/auto-update/manage_1.png" style="flex: 1; min-width: 300px; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--glass-border);" alt="Disable Auto Update">
+                    </div>
                 </div>
             </div>
 
             <div class="card step-card">
                 <div class="step-number">2</div>
                 <div class="step-content">
-                    <h3 data-i18n="step2Title">Import a Mod</h3>
-                    <p data-i18n="step2Text">Click the <strong>Import new mod</strong> button. Use the file selector at the bottom right to choose your <code>.upk</code> mod file. Enter the name of your mod (e.g., <em>Porsche 911 GT3 RS</em>), type the item it replaces (e.g., <em>Hotshot</em>), and select the correct category (e.g., <em>Body</em>). Finally, click <strong>Add mod</strong>.</p>
-                    <img src="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/preview/importmod_preview.png" style="width: 100%; max-width: 650px; border-radius: 8px; margin-top: 1.5rem; border: 1px solid var(--glass-border); display: block;" alt="Import Mod Preview">
+                    <h3 data-i18n="step2Title">Select Game Folder</h3>
+                    <p data-i18n="step2Text">When you run Alphy for the first time, you will be prompted to select your Rocket League installation folder. This target folder must be named <code>rocketleague</code>. For example: <code>D:\EG\rocketleague</code>.</p>
                 </div>
             </div>
 
             <div class="card step-card">
                 <div class="step-number">3</div>
                 <div class="step-content">
-                    <h3 data-i18n="step3Title">Select & Apply Mods</h3>
-                    <p data-i18n="step3Text">Click the three horizontal lines at the top left to change categories. Select the mods you want to equip, then click the save button at the bottom left.</p>
+                    <h3 data-i18n="step3Title">Import a Mod</h3>
+                    <p data-i18n="step3Text">Click the <strong>Import new mod</strong> button. Use the file selector at the bottom right to choose your <code>.upk</code> mod file. Enter the name of your mod (e.g., <em>Porsche 911 GT3 RS</em>), type the item it replaces (e.g., <em>Hotshot</em>), and select the correct category (e.g., <em>Body</em>). Finally, click <strong>Add mod</strong>.</p>
+                    <img src="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/preview/importmod_preview.png" style="width: 100%; max-width: 650px; border-radius: 8px; margin-top: 1.5rem; border: 1px solid var(--glass-border); display: block;" alt="Import Mod Preview">
+                </div>
+            </div>
+
+            <div class="card step-card">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3 data-i18n="step4Title">Select & Apply Mods</h3>
+                    <p data-i18n="step4Text">Click the three horizontal lines at the top left to change categories. Select the mods you want to equip, then click the save button at the bottom right. Alphy will automatically back up your original game files and apply the changes before you launch the game!</p>
                     <img src="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/preview/alphy1.3.0_preview.png" style="width: 100%; max-width: 650px; border-radius: 8px; margin-top: 1.5rem; border: 1px solid var(--glass-border); display: block;" alt="Apply Mod Preview">
                 </div>
             </div>
 
             <div class="card step-card" style="margin-bottom: 3rem;">
-                <div class="step-number">4</div>
+                <div class="step-number">5</div>
                 <div class="step-content">
-                    <h3 data-i18n="step4Title">Remove Mods</h3>
-                    <p data-i18n="step4Text">To uninstall, click the <strong>Remove mods</strong> button. Select a category from the dropdown menu to view your installed mods. You can select a single mod, multiple mods, or all of them at once. Click <strong>Remove selected</strong> to instantly restore your original game files.</p>
+                    <h3 data-i18n="step5Title">Remove Mods</h3>
+                    <p data-i18n="step5Text">To uninstall, click the <strong>Remove mods</strong> button. Select a category from the dropdown menu to view your installed mods. You can select a single mod, multiple mods, or all of them at once. Click <strong>Remove selected</strong> to instantly restore your original game files.</p>
                     <img src="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/preview/removemod_preview.png" style="width: 100%; max-width: 650px; border-radius: 8px; margin-top: 1.5rem; border: 1px solid var(--glass-border); display: block;" alt="Remove Mod Preview">
                 </div>
             </div>
@@ -608,10 +633,11 @@
                 lblAppVer: "ALPHY VERSION", lblGameVer: "GAME VERSION SUPPORTED",
                 card1Title: "Safe & External Management", card1Text: "Alphy operates completely outside of game memory, ensuring zero injection and maximum safety. Simply select your mods, and the app instantly secures your original game files with automated backups before any changes take place. One click to apply, one click to restore.",
                 guideTitle: "How it Works",
-                step1Title: "Select Game Folder", step1Text: "When you run Alphy for the first time, you will be prompted to select your Rocket League installation folder. This target folder must be named <code>rocketleague</code>. For example: <code>D:\\EG\\rocketleague</code>.",
-                step2Title: "Import a Mod", step2Text: "Click the <strong>Import new mod</strong> button. Use the file selector at the bottom right to choose your <code>.upk</code> mod file. Enter the name of your mod (e.g., <em>Porsche 911 GT3 RS</em>), type the item it replaces (e.g., <em>Hotshot</em>), and select the correct category (e.g., <em>Body</em>). Finally, click <strong>Add mod</strong>.",
-                step3Title: "Select & Apply Mods", step3Text: "Click the three horizontal lines at the top left to change categories. Select the mods you want to equip, then click the save button at the bottom left.",
-                step4Title: "Remove Mods", step4Text: "To uninstall, click the <strong>Remove mods</strong> button. Select a category from the dropdown menu to view your installed mods. You can select a single mod, multiple mods, or all of them at once. Click <strong>Remove selected</strong> to instantly restore your original game files.",
+                step1Title: "Disable Auto Updates", step1Text: "Before installing Alphy, you must disable auto-updates for Rocket League in the Epic Games Launcher. Click the three dots on the game tile, select <strong>Manage</strong>, and uncheck <strong>Auto Update</strong>. If you skip this step, Epic Games may verify your files and automatically remove your mods!",
+                step2Title: "Select Game Folder", step2Text: "When you run Alphy for the first time, you will be prompted to select your Rocket League installation folder. This target folder must be named <code>rocketleague</code>. For example: <code>D:\\EG\\rocketleague</code>.",
+                step3Title: "Import a Mod", step3Text: "Click the <strong>Import new mod</strong> button. Use the file selector at the bottom right to choose your <code>.upk</code> mod file. Enter the name of your mod (e.g., <em>Porsche 911 GT3 RS</em>), type the item it replaces (e.g., <em>Hotshot</em>), and select the correct category (e.g., <em>Body</em>). Finally, click <strong>Add mod</strong>.",
+                step4Title: "Select & Apply Mods", step4Text: "Click the three horizontal lines at the top left to change categories. Select the mods you want to equip, then click the save button at the bottom right. Alphy will automatically back up your original game files and apply the changes before you launch the game!",
+                step5Title: "Remove Mods", step5Text: "To uninstall, click the <strong>Remove mods</strong> button. Select a category from the dropdown menu to view your installed mods. You can select a single mod, multiple mods, or all of them at once. Click <strong>Remove selected</strong> to instantly restore your original game files.",
                 altTitle: "Alternative: Manual Installation",
                 altStep1Title: "The Mods Directory", altStep1Text: "If you prefer not to use the UI, Alphy automatically generates a <code>mods</code> folder in the exact same location as the <code>.exe</code> file. Inside, you will find categorized sub-folders ready for your files:",
                 altStep2Title: "Adding a Mod Manually", altStep2Text: "To install a new mod manually, navigate to the correct category, create a named folder for your mod, and drop the <code>.upk</code> file inside.<br><br>For example, if you want to replace the Octane body with a Fennec mod:<br><code>mods\\Body\\Fennec (Replaces Octane)\\Body_Octane_SF.upk</code>",
@@ -643,10 +669,11 @@
                 lblAppVer: "VERSION D'ALPHY", lblGameVer: "VERSION DU JEU SUPPORTÉE",
                 card1Title: "Gestion Externe et Sécurisée", card1Text: "Alphy fonctionne complètement en dehors de la mémoire du jeu, garantissant aucune injection et une sécurité maximale. Sélectionnez simplement vos mods, et l'application sécurise instantanément vos fichiers de jeu originaux avec des sauvegardes automatiques avant toute modification. Un clic pour appliquer, un clic pour restaurer.",
                 guideTitle: "Comment ça marche",
-                step1Title: "Sélectionner le dossier du jeu", step1Text: "Lorsque vous lancez Alphy pour la première fois, il vous sera demandé de sélectionner le dossier d'installation de Rocket League. Ce dossier cible doit être nommé <code>rocketleague</code>. Par exemple : <code>D:\\EG\\rocketleague</code>.",
-                step2Title: "Importer un Mod", step2Text: "Cliquez sur le bouton <strong>Import new mod</strong>. Utilisez le sélecteur de fichier en bas à droite pour choisir votre fichier <code>.upk</code>. Entrez le nom de votre mod (ex: <em>Porsche 911 GT3 RS</em>), l'objet qu'il remplace (ex: <em>Hotshot</em>), et sélectionnez la catégorie (ex: <em>Body</em>). Enfin, cliquez sur <strong>Add mod</strong>.",
-                step3Title: "Sélectionner et Appliquer des Mods", step3Text: "Cliquez sur les trois lignes horizontales en haut à gauche pour changer de catégorie. Sélectionnez les mods que vous souhaitez équiper, puis cliquez sur le bouton de sauvegarde en bas à gauche.",
-                step4Title: "Supprimer des Mods", step4Text: "Pour désinstaller, cliquez sur le bouton <strong>Remove mods</strong>. Sélectionnez une catégorie dans le menu déroulant pour voir vos mods installés. Vous pouvez sélectionner un seul mod, plusieurs, ou tous en même temps. Cliquez sur <strong>Remove selected</strong> pour restaurer instantanément vos fichiers d'origine.",
+                step1Title: "Désactiver les mises à jour automatiques", step1Text: "Avant d'installer Alphy, vous devez désactiver les mises à jour automatiques de Rocket League dans le lanceur Epic Games. Cliquez sur les trois points sur la miniature du jeu, sélectionnez <strong>Gérer</strong>, et décochez <strong>Mise à jour automatique</strong>. Si vous ignorez cette étape, Epic Games risque de vérifier vos fichiers et de supprimer vos mods !",
+                step2Title: "Sélectionner le dossier du jeu", step2Text: "Lorsque vous lancez Alphy pour la première fois, il vous sera demandé de sélectionner le dossier d'installation de Rocket League. Ce dossier cible doit être nommé <code>rocketleague</code>. Par exemple : <code>D:\\EG\\rocketleague</code>.",
+                step3Title: "Importer un Mod", step3Text: "Cliquez sur le bouton <strong>Import new mod</strong>. Utilisez le sélecteur de fichier en bas à droite pour choisir votre fichier <code>.upk</code>. Entrez le nom de votre mod (ex: <em>Porsche 911 GT3 RS</em>), l'objet qu'il remplace (ex: <em>Hotshot</em>), et sélectionnez la catégorie (ex: <em>Body</em>). Enfin, cliquez sur <strong>Add mod</strong>.",
+                step4Title: "Sélectionner et Appliquer des Mods", step4Text: "Cliquez sur les trois lignes horizontales en haut à gauche pour changer de catégorie. Sélectionnez les mods que vous souhaitez équiper, puis cliquez sur le bouton de sauvegarde en bas à droite. Alphy sauvegardera automatiquement vos fichiers d'origine et appliquera les modifications avant que vous ne lanciez le jeu !",
+                step5Title: "Supprimer des Mods", step5Text: "Pour désinstaller, cliquez sur le bouton <strong>Remove mods</strong>. Sélectionnez une catégorie dans le menu déroulant pour voir vos mods installés. Vous pouvez sélectionner un seul mod, plusieurs, ou tous en même temps. Cliquez sur <strong>Remove selected</strong> pour restaurer instantanément vos fichiers d'origine.",
                 altTitle: "Alternative : Installation Manuelle",
                 altStep1Title: "Le répertoire des Mods", altStep1Text: "Si vous préférez ne pas utiliser l'interface, Alphy génère automatiquement un dossier <code>mods</code> au même emplacement que le fichier <code>.exe</code>. À l'intérieur, vous trouverez des sous-dossiers catégorisés :",
                 altStep2Title: "Ajouter un Mod Manuellement", altStep2Text: "Pour installer un nouveau mod manuellement, naviguez vers la catégorie correspondante, créez un dossier nommé pour votre mod, et déposez le fichier <code>.upk</code> à l'intérieur.<br><br>Par exemple :<br><code>mods\\Body\\Fennec (Replaces Octane)\\Body_Octane_SF.upk</code>",
@@ -734,14 +761,19 @@
 
                 if (line.toLowerCase().startsWith('v')) {
                     if (inCard) html += '</ul></div>';
+                    
                     let parts = line.split('-');
                     let version = parts[0].trim();
+                    let date = parts.length > 2 ? parts.pop().trim() : '';
                     let title = parts.slice(1).join('-').trim();
+                    
+                    let dateHTML = date ? `<span class="patch-date">${date}</span>` : '';
                     
                     html += `<div class="patch-card">
                                 <div class="patch-header">
                                     <span class="patch-version">${version}</span>
                                     <span class="patch-title">${title}</span>
+                                    ${dateHTML}
                                 </div>
                                 <ul class="patch-list">`;
                     inCard = true;
