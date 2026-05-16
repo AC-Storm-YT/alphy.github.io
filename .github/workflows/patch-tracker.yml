@@ -1,41 +1,56 @@
 name: Rocket League Patch Tracker
 
-# Controls when the workflow will run
 on:
   schedule:
-    # Runs at the top of every hour. You can adjust this cron syntax.
-    - cron: '0 * * * *'
-  
-  # Allows you to run this workflow manually from the Actions tab
+    # Checks every 30 minutes. 
+    - cron: '*/30 * * * *'
   workflow_dispatch:
+
+# Required to allow GitHub Actions to commit the state file back to the repo
+permissions:
+  contents: write 
 
 jobs:
   check-and-send:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Fetch RSS and Post to Discord
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Fetch RSS, Check State, and Post to Discord
         shell: pwsh
         env:
-          # Pulls your webhook URL securely from GitHub Secrets
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK2 }}
         run: |
           $rssUrl = "https://steamdb.info/api/PatchnotesRSS/?appid=252950"
+          $stateFile = ".last_patch_guid"
+          
+          # 1. Load the last known patch GUID if the file exists
+          $lastGuid = if (Test-Path $stateFile) { Get-Content $stateFile } else { "" }
           
           try {
-              # 1. Fetch the raw XML data
               $webResponse = Invoke-WebRequest -Uri $rssUrl -Headers @{ "User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" }
               [xml]$xml = $webResponse.Content
               
-              # 2. Grab the newest patch node
               $latestPatch = $xml.rss.channel.item[0]
               
               if ($null -ne $latestPatch) {
+                  # In PowerShell XML, getting the inner text of a node with attributes
+                  $currentGuid = $latestPatch.guid.InnerText 
+                  
+                  # 2. Compare. If they match, exit the script cleanly.
+                  if ($currentGuid -eq $lastGuid) {
+                      Write-Output "No new updates found. Last patch is still $lastGuid."
+                      exit 0
+                  }
+                  
+                  Write-Output "New update detected: $currentGuid"
+                  
                   $title = $latestPatch.title
                   $link = $latestPatch.link
                   $pubDate = $latestPatch.pubDate
                   
-                  # Parse date to ISO 8601 for Discord's timestamp requirement
                   $dateObj = [datetime]::ParseExact($pubDate, 'ddd, dd MMM yyyy HH:mm:ss zzz', [System.Globalization.CultureInfo]::InvariantCulture)
                   $isoDate = $dateObj.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
                   
@@ -57,6 +72,9 @@ jobs:
                   if (![string]::IsNullOrEmpty($env:DISCORD_WEBHOOK)) {
                       Invoke-RestMethod -Uri $env:DISCORD_WEBHOOK -Method Post -Body $payload -ContentType "application/json"
                       Write-Output "Successfully sent to Discord: $title"
+                      
+                      # 5. Overwrite the state file with the new GUID so it gets committed
+                      Set-Content -Path $stateFile -Value $currentGuid
                   } else {
                       Write-Error "DISCORD_WEBHOOK secret is missing."
                   }
@@ -64,3 +82,20 @@ jobs:
           } catch {
               Write-Error "Failed to process patch notes: $_"
           }
+
+      - name: Commit and Push State File
+        run: |
+          # Configure git to act as the GitHub Actions bot
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # Stage the state file
+          git add .last_patch_guid
+          
+          # Only commit and push if the file actually changed
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: update latest RL patch state"
+            git push
+          else
+            echo "No state changes to commit."
+          fi
