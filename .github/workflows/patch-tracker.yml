@@ -1,0 +1,66 @@
+name: Rocket League Patch Tracker
+
+# Controls when the workflow will run
+on:
+  schedule:
+    # Runs at the top of every hour. You can adjust this cron syntax.
+    - cron: '0 * * * *'
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  check-and-send:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fetch RSS and Post to Discord
+        shell: pwsh
+        env:
+          # Pulls your webhook URL securely from GitHub Secrets
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK2 }}
+        run: |
+          $rssUrl = "https://steamdb.info/api/PatchnotesRSS/?appid=252950"
+          
+          try {
+              # 1. Fetch the raw XML data
+              $webResponse = Invoke-WebRequest -Uri $rssUrl -Headers @{ "User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" }
+              [xml]$xml = $webResponse.Content
+              
+              # 2. Grab the newest patch node
+              $latestPatch = $xml.rss.channel.item[0]
+              
+              if ($null -ne $latestPatch) {
+                  $title = $latestPatch.title
+                  $link = $latestPatch.link
+                  $pubDate = $latestPatch.pubDate
+                  
+                  # Parse date to ISO 8601 for Discord's timestamp requirement
+                  $dateObj = [datetime]::ParseExact($pubDate, 'ddd, dd MMM yyyy HH:mm:ss zzz', [System.Globalization.CultureInfo]::InvariantCulture)
+                  $isoDate = $dateObj.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+                  
+                  # 3. Construct the JSON payload
+                  $payload = @{
+                      username = "RL Patch Tracker"
+                      avatar_url = "https://steamdb.info/static/logos/512px.png"
+                      embeds = @(
+                          @{
+                              title = $title
+                              url = $link
+                              color = 240116
+                              timestamp = $isoDate
+                          }
+                      )
+                  } | ConvertTo-Json -Depth 5
+                  
+                  # 4. Fire the webhook POST request
+                  if (![string]::IsNullOrEmpty($env:DISCORD_WEBHOOK)) {
+                      Invoke-RestMethod -Uri $env:DISCORD_WEBHOOK -Method Post -Body $payload -ContentType "application/json"
+                      Write-Output "Successfully sent to Discord: $title"
+                  } else {
+                      Write-Error "DISCORD_WEBHOOK secret is missing."
+                  }
+              }
+          } catch {
+              Write-Error "Failed to process patch notes: $_"
+          }
