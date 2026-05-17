@@ -1,6 +1,6 @@
 v1.3.3 - The Cloud Safety Update - May 16 2026
 -------------------------------------------
-- Live Build Tracking: Alphy now features a new build tracking system that cross-references the live Rocket League build against our supported build list via github.
+- Build Tracking: Alphy now features a new build tracking system that cross-references the live Rocket League build against our supported build list via github.
 - Enhanced Lockdown Protocol: If an unexpected Rocket League patch drops, Alphy will detect the build mismatch and lock the app.
 
 v1.3.2 - Dynamic Backup Synchronization - May 11 2026
