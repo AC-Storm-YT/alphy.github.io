@@ -682,14 +682,14 @@
                 altStep1Title: "Le répertoire des Mods", altStep1Text: "Si vous préférez ne pas utiliser l'interface, Alphy génère automatiquement un dossier <code>mods</code> au même emplacement que le fichier <code>.exe</code>. À l'intérieur, vous trouverez des sous-dossiers catégorisés :",
                 altStep2Title: "Ajouter un Mod Manuellement", altStep2Text: "Pour installer un nouveau mod manuellement, naviguez vers la catégorie correspondante, créez un dossier nommé pour votre mod, et déposez le fichier <code>.upk</code> à l'intérieur.<br><br>Par exemple :<br><code>mods\\Body\\Fennec (Replaces Octane)\\Body_Octane_SF.upk</code>",
                 altStep3Title: "Sauvegarde Automatique", altStep3Text: "Redémarrez ou lancez Alphy. L'application détectera immédiatement les nouveaux fichiers. Lors de l'application, elle copie en toute sécurité votre fichier original vers :<br><code>%appdata%\\Alphy\\Backups\\Body_Octane_SF.upk.bak</code>",
-                showcaseTitle: "Vidéos", showcaseText: "Regardez Alphy en action et découvrez à quel point il est facile de gérer vos mods Rocket League.",
+                showcaseTitle: "Vidéos", showcaseText: "Regardez Alphy in action et découvrez à quel point il est facile de gérer vos mods Rocket League.",
                 patchTitle: "Notes de version",
                 qaTitle: "FAQ",
                 qa1Title: "1. Qu'est-ce qu'Alphy ?", qa1Text: "Alphy est un gestionnaire de mods gratuit et externe créé pour Rocket League. Il vous permet d'appliquer facilement des cosmétiques personnalisés (carrosseries, stickers, explosions de but) en gérant vos fichiers de jeu locaux. Il s'occupe de tout l'aspect technique à votre place, appliquant ou retirant les mods instantanément tout en conservant une sauvegarde sécurisée de vos fichiers d'origine.",
                 qa2Title: "2. Est-ce qu'Alphy est sûr à utiliser ?", qa2Text: "Oui. Les mods chargés par Alphy sont créés avec <a href='https://github.com/CrunchyRL/RLUPKTools' target='_blank' style='color: #60a5fa; text-decoration: underline;'>RLUPKTools</a>, un utilitaire qui modifie les fichiers Unreal Engine Package (<code>.upk</code>). Cela signifie qu'Alphy agit comme un simple gestionnaire de fichiers. Au lieu d'injecter du code dans la mémoire de votre ordinateur pendant que le jeu tourne, Alphy échange simplement des ressources cosmétiques—comme des modèles 3D et des textures—sur votre disque dur avant même que vous lanciez le jeu. Comme il effectue des remplacements de fichiers locaux plutôt que de modifier la mémoire active, il ne déclenche pas les logiciels anti-triche.",
                 disclaimerTitle: "Avertissement :", disclaimerText: "Les utilisateurs modifient leur jeu à leurs propres risques. Bien que cette méthode se soit avérée sûre jusqu'à présent, nous ne pouvons être tenus responsables d'éventuels bannissements de compte à l'avenir.",
                 qa3Title: "3. Est-ce qu'Alphy est gratuit ?", qa3Text: "Oui, il est 100 % gratuit et ne deviendra jamais un logiciel payant. Nous n'acceptons pas non plus les dons, car l'application nécessite des fichiers provenant d'une autre source pour être utile, et nous estimons qu'il ne serait pas correct d'accepter de l'argent pour cela.",
-                qa4Title: "4. Est-ce qu'Alphy fonctionne sur console ?", qa4Text: "Non. Alphy nécessite d'accéder aux répertoires du jeu sur PC et aux fichiers locaux, ce qui signifie qu'il n'est disponible que pour Windows.",
+                qa4Title: "4. Est-ce qu'Alphy fonctionne sur console ?", qa4Text: "No. Alphy nécessite d'accéder aux répertoires du jeu sur PC et aux fichiers locaux, ce qui signifie qu'il n'est disponible que pour Windows.",
                 qa5Title: "5. Alphy inclut-il des mods pré-installés ?", qa5Text: "Non. Alphy est strictement un gestionnaire de mods. Nous ne distribuons ni n'hébergeons aucun fichier de jeu propriétaire ou fichier `.upk` dans l'application. Vous devez acquérir les mods cosmétiques vous-même et utiliser Alphy pour les appliquer à votre jeu.",
                 qa6Title: "6. Où puis-je trouver des mods à installer ?", qa6Text: "Comme Alphy n'inclut pas de mods, vous pouvez trouver des cosmétiques personnalisés créés par la communauté dans des serveurs Discord dédiés au modding, comme le serveur officiel <a href='https://discord.gg/A2mrCVdpPw' target='_blank' style='color: #60a5fa; text-decoration: underline;'>TitleWave Beta</a>.",
                 qa7Title: "7. Est-ce que les autres joueurs peuvent voir mes mods ?", qa7Text: "Non. Comme Alphy modifie les fichiers `.upk` locaux sur votre disque dur, les cosmétiques personnalisés sont uniquement visibles de votre côté (client-side). Les autres joueurs verront la voiture de base que vous avez équipée.",
@@ -823,13 +823,13 @@
                 
                 document.getElementById('changelog-display').innerHTML = parseChangelogToHTML(loadedChangelogEN);
 
-                const isLockdown = lock.trim().toLowerCase() === 'true';
+                const lockdownStatusStr = lock.trim().toLowerCase();
                 const indicator = document.getElementById('status-indicator');
                 
-                if (isLockdown) {
+                if (lockdownStatusStr === 'true') {
                     currentNetworkStatus = 'maintenance';
                     indicator.className = 'status-badge status-maintenance';
-                } else if (globalLatestBuild && globalSupportedBuild && globalLatestBuild !== globalSupportedBuild) {
+                } else if (lockdownStatusStr === 'update') {
                     currentNetworkStatus = 'update';
                     indicator.className = 'status-badge status-update';
                 } else {
