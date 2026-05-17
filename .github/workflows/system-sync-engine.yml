@@ -1,0 +1,103 @@
+name: Alphy Sync & Lockdown Engine
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'supportedbuild' # Instantly updates the state if you manually declare a build supported
+
+permissions:
+  contents: write
+
+jobs:
+  sync-system-state:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Fetch Latest Patch and Evaluate State
+        shell: pwsh
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK2 }}
+        run: |
+          $rssUrl = "https://steamdb.info/api/PatchnotesRSS/?appid=252950"
+          $steamFile = "rlsteambuild.txt"
+          $suppFile = "supportedbuild"
+          $lockFile = "lockdown.txt"
+          
+          # 1. Read existing tracking values from repository
+          $lastGuid = if (Test-Path $stateFile) { (Get-Content $steamFile).Trim() } else { "" }
+          $supportedBuild = if (Test-Path $suppFile) { (Get-Content $suppFile).Trim() } else { "" }
+          $currentLockdown = if (Test-Path $lockFile) { (Get-Content $lockFile).Trim() } else { "false" }
+          
+          $newGuid = $lastGuid
+          
+          # 2. Check for new Steam patches
+          try {
+              $webResponse = Invoke-WebRequest -Uri $rssUrl -Headers @{ "User-Agent" = "Mozilla/5.0" }
+              [xml]$xml = $webResponse.Content
+              $latestPatch = $xml.rss.channel.item[0]
+              
+              if ($null -ne $latestPatch) {
+                  $newGuid = $latestPatch.guid.InnerText.Trim()
+                  
+                  if ($newGuid -ne $lastGuid) {
+                      Write-Output "New game update detected: $newGuid"
+                      
+                      # Send the standard live patch broadcast announcement message
+                      $title = $latestPatch.title
+                      $link = $latestPatch.link
+                      $pubDate = $latestPatch.pubDate
+                      $dateObj = [datetime]::ParseExact($pubDate, 'ddd, dd MMM yyyy HH:mm:ss zzz', [System.Globalization.CultureInfo]::InvariantCulture)
+                      $isoDate = $dateObj.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+                      
+                      $payload = @{
+                          username = "RL Patch Tracker"
+                          avatar_url = "https://steamdb.info/static/logos/512px.png"
+                          embeds = @(@{
+                              title = $title
+                              url = $link
+                              color = 240116
+                              timestamp = $isoDate
+                          })
+                      } | ConvertTo-Json -Depth 5
+                      
+                      if (![string]::IsNullOrEmpty($env:DISCORD_WEBHOOK)) {
+                          Invoke-RestMethod -Uri $env:DISCORD_WEBHOOK -Method Post -Body $payload -ContentType "application/json"
+                          Set-Content -Path $steamFile -Value $newGuid
+                      }
+                  }
+              }
+          } catch {
+              Write-Error "Failed to check patch notes: $_"
+          }
+          
+          # 3. Evaluate target lockdown state using the fresh sync data
+          $targetLockdown = if ($newGuid -ne $supportedBuild) { "update" } else { "false" }
+          
+          # Preserve manual true/maintenance locks if you manually set lockdown.txt to true
+          if ($currentLockdown -eq "true") {
+              $targetLockdown = "true"
+          }
+          
+          if ($currentLockdown -ne $targetLockdown) {
+              Write-Output "Changing system state from '$currentLockdown' to '$targetLockdown'"
+              Set-Content -Path $lockFile -Value $targetLockdown
+          }
+
+      - name: Commit and Push Combined Changes
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          git add rlsteambuild.txt lockdown.txt
+          
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: auto-sync builds and system system lock status"
+            git push
+          else
+            echo "No state changes to commit."
+          fi
