@@ -1,6 +1,6 @@
 v1.3.3 - Mise à Jour Sécurité Cloud - 16 mai 2026
 -------------------------------------------
-- Suivi des Builds en Direct : Alphy intègre désormais un nouveau système de suivi qui croise le build actuel de Rocket League avec notre liste de builds supportés via github.
+- Suivi des Builds : Alphy intègre désormais un nouveau système de suivi qui croise le build actuel de Rocket League avec notre liste de builds supportés via github.
 - Protocole de Verrouillage Amélioré : Si une mise à jour inattendue de Rocket League est déployée, Alphy détectera la différence de build et verrouillera l'application.
 
 v1.3.2 - Synchronisation Dynamique des Sauvegardes - 11 mai 2026
