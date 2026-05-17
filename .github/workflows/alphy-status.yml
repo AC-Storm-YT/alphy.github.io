@@ -1,64 +1,75 @@
-name: Alphy Lockdown Manager
+name: Alphy Status Monitor
 
 on:
-  schedule:
-    - cron: '*/30 * * * *'
-  workflow_dispatch:
   push:
+    branches:
+      - main
     paths:
+      - 'lockdown.txt'
+      - 'version.txt'
       - 'rlsteambuild.txt'
       - 'supportedbuild'
 
-permissions:
-  contents: write 
-
 jobs:
-  evaluate-lockdown:
+  update_discord_status:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Compare Builds and Determine State
+      - name: Read files and update Discord
+        env:
+          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
+          MESSAGE_ID: "1503500652758827182"
         run: |
-          # Read the files and trim any accidental whitespace or newlines using xargs
-          STEAM_BUILD=$(cat rlsteambuild.txt | xargs)
-          SUPPORTED_BUILD=$(cat supportedbuild | xargs)
-          CURRENT_LOCKDOWN=$(cat lockdown.txt | xargs)
-          
-          echo "Live Steam Build: '$STEAM_BUILD'"
-          echo "Supported Build: '$SUPPORTED_BUILD'"
-          echo "Current Lockdown: '$CURRENT_LOCKDOWN'"
+          STATUS=$(cat lockdown.txt | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
 
-          # Compare the builds to determine the target state
-          if [ "$STEAM_BUILD" != "$SUPPORTED_BUILD" ]; then
-            TARGET_LOCKDOWN="update"
+          if [ -f "version.txt" ]; then
+            VERSION=$(cat version.txt | tr -d '\n' | tr -d '\r')
           else
-            TARGET_LOCKDOWN="false"
+            VERSION="Unknown"
           fi
 
-          echo "Target Lockdown: '$TARGET_LOCKDOWN'"
-
-          if [ "$CURRENT_LOCKDOWN" != "$TARGET_LOCKDOWN" ]; then
-            echo "State mismatch detected. Updating lockdown.txt to '$TARGET_LOCKDOWN'..."
-            echo "$TARGET_LOCKDOWN" > lockdown.txt
+          if [ -f "rlsteambuild.txt" ]; then
+            RL_STEAM=$(cat rlsteambuild.txt | tr -d '\n' | tr -d '\r')
           else
-            echo "State is already correct. No action needed."
+            RL_STEAM="Unknown"
           fi
 
-      - name: Commit and Push Changes
-        run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          
-          git add lockdown.txt
-
-          if ! git diff --staged --quiet; then
-            NEW_STATE=$(cat lockdown.txt)
-            git commit -m "chore: auto-set lockdown state to '$NEW_STATE'"
-            git push
-            echo "Successfully pushed new lockdown state."
+          if [ -f "supportedbuild" ]; then
+            SUPP_BUILD=$(cat supportedbuild | tr -d '\n' | tr -d '\r')
           else
-            echo "No file changes detected by Git. Skipping push."
+            SUPP_BUILD="Unknown"
           fi
+
+          if [ "$STATUS" == "true" ]; then
+            # (Lockdown is TRUE -> MAINTENANCE/RED)
+            TITLE="⚠️ **MAINTENANCE**"
+            COLOR=16711680 # Red
+            SUBTITLE="__System Status__"
+            DETAIL="*The mod network is temporarily offline for upgrades.*"
+          elif [ "$STATUS" == "false" ]; then
+            # (Lockdown is FALSE -> OPERATIONAL/GREEN)
+            TITLE="✅ **OPERATIONAL**"
+            COLOR=65280 # Green
+            SUBTITLE="__System Status__"
+            DETAIL="*All systems are running normally. Happy modding!*"
+          elif [ "$STATUS" == "update" ]; then
+            # (Lockdown is UPDATE -> UPDATE REQUIRED/ORANGE)
+            TITLE="🔄 **UPDATE REQUIRED**"
+            COLOR=16753920 # Orange
+            SUBTITLE="__System Status__"
+            DETAIL="*Alphy requires an update to support the latest Rocket League patch.*\n\n**Supported Build:** $SUPP_BUILD\n**Latest Build:** $RL_STEAM"
+          else
+            TITLE="❓ **UNKNOWN**"
+            COLOR=8421504 # Gray
+            SUBTITLE="__System Status__"
+            DETAIL="lockdown.txt was updated, but the status is unknown: $STATUS"
+          fi
+
+          DESCRIPTION="$TITLE\n\n# $SUBTITLE\n\n$DETAIL\n\n\n\n**Alphy Version:** $VERSION"
+
+          curl -H "Content-Type: application/json" \
+          -X PATCH \
+          -d "{\"embeds\": [{\"description\": \"$DESCRIPTION\", \"color\": $COLOR}]}" \
+          "$WEBHOOK_URL/messages/$MESSAGE_ID"
