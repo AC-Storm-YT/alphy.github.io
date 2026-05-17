@@ -363,6 +363,7 @@
 
         .status-online { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid var(--success); }
         .status-maintenance { background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid var(--danger); }
+        .status-update { background: rgba(245, 158, 11, 0.1); color: var(--warning); border: 1px solid var(--warning); }
 
         @media (max-width: 900px) {
             .hero { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
@@ -623,7 +624,9 @@
             appVersion: 'https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/version.txt',
             gameVersion: 'https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/gameversion.txt',
             changelogEN: 'https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/changelog.txt',
-            changelogFR: 'https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/changelog_fr.txt'
+            changelogFR: 'https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/changelog_fr.txt',
+            rlSteamBuild: 'https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/rlsteambuild.txt',
+            supportedBuild: 'https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/supportedbuild'
         };
 
         const translations = {
@@ -660,6 +663,7 @@
                 contactBtn: "Join Discord Server",
                 statusMaintenance: "MAINTENANCE", statusMaintenanceMsg: "The mod network is temporarily offline for upgrades.",
                 statusOnline: "OPERATIONAL", statusOnlineMsg: "All systems are running normally. Happy modding!",
+                statusUpdate: "UPDATE REQUIRED", statusUpdateMsg: "Alphy requires an update to support the latest Rocket League patch.<br><br><span style='color: var(--text-color);'>Supported Build:</span> {supported}<br><span style='color: var(--text-color);'>Latest Build:</span> {latest}",
                 statusOffline: "OFFLINE", statusOfflineMsg: "Unable to reach server.",
                 toggleBtn: "FR"
             },
@@ -696,6 +700,7 @@
                 contactBtn: "Rejoindre le serveur Discord",
                 statusMaintenance: "MAINTENANCE", statusMaintenanceMsg: "Le réseau est temporairement hors ligne pour des mises à jour.",
                 statusOnline: "OPÉRATIONNEL", statusOnlineMsg: "Tous les systèmes fonctionnent normalement. Bon modding !",
+                statusUpdate: "MISE À JOUR REQUISE", statusUpdateMsg: "Alphy doit être mis à jour pour supporter le dernier patch de Rocket League.<br><br><span style='color: var(--text-color);'>Version supportée :</span> {supported}<br><span style='color: var(--text-color);'>Dernière version :</span> {latest}",
                 statusOffline: "HORS LIGNE", statusOfflineMsg: "Impossible de joindre le serveur.",
                 toggleBtn: "EN"
             }
@@ -706,6 +711,8 @@
         
         let loadedChangelogEN = '';
         let loadedChangelogFR = '';
+        let globalLatestBuild = '';
+        let globalSupportedBuild = '';
 
         function toggleLanguage() {
             currentLang = currentLang === 'en' ? 'fr' : 'en';
@@ -730,13 +737,18 @@
             
             if (currentNetworkStatus === 'maintenance') {
                 indicator.innerText = translations[currentLang].statusMaintenance;
-                message.innerText = translations[currentLang].statusMaintenanceMsg;
+                message.innerHTML = translations[currentLang].statusMaintenanceMsg;
             } else if (currentNetworkStatus === 'online') {
                 indicator.innerText = translations[currentLang].statusOnline;
-                message.innerText = translations[currentLang].statusOnlineMsg;
+                message.innerHTML = translations[currentLang].statusOnlineMsg;
+            } else if (currentNetworkStatus === 'update') {
+                indicator.innerText = translations[currentLang].statusUpdate;
+                let msg = translations[currentLang].statusUpdateMsg;
+                msg = msg.replace('{supported}', globalSupportedBuild).replace('{latest}', globalLatestBuild);
+                message.innerHTML = msg;
             } else if (currentNetworkStatus === 'offline') {
                 indicator.innerText = translations[currentLang].statusOffline;
-                message.innerText = translations[currentLang].statusOfflineMsg;
+                message.innerHTML = translations[currentLang].statusOfflineMsg;
             }
         }
 
@@ -791,12 +803,14 @@
 
         async function fetchAppData() {
             try {
-                const [appV, gameV, lock, clEN, clFR] = await Promise.all([
-                    fetch(URLS.appVersion).then(r => r.text()),
-                    fetch(URLS.gameVersion).then(r => r.text()),
-                    fetch(URLS.lockdown).then(r => r.text()),
+                const [appV, gameV, lock, clEN, clFR, rlSteam, suppBuild] = await Promise.all([
+                    fetch(URLS.appVersion).then(r => r.ok ? r.text() : ''),
+                    fetch(URLS.gameVersion).then(r => r.ok ? r.text() : ''),
+                    fetch(URLS.lockdown).then(r => r.ok ? r.text() : ''),
                     fetch(URLS.changelogEN).then(r => r.ok ? r.text() : ''),
-                    fetch(URLS.changelogFR).then(r => r.ok ? r.text() : '')
+                    fetch(URLS.changelogFR).then(r => r.ok ? r.text() : ''),
+                    fetch(URLS.rlSteamBuild).then(r => r.ok ? r.text() : ''),
+                    fetch(URLS.supportedBuild).then(r => r.ok ? r.text() : '')
                 ]);
 
                 document.getElementById('app-version-display').innerText = appV.trim();
@@ -804,6 +818,8 @@
                 
                 loadedChangelogEN = clEN;
                 loadedChangelogFR = clFR || clEN; 
+                globalLatestBuild = rlSteam.trim();
+                globalSupportedBuild = suppBuild.trim();
                 
                 document.getElementById('changelog-display').innerHTML = parseChangelogToHTML(loadedChangelogEN);
 
@@ -813,6 +829,9 @@
                 if (isLockdown) {
                     currentNetworkStatus = 'maintenance';
                     indicator.className = 'status-badge status-maintenance';
+                } else if (globalLatestBuild && globalSupportedBuild && globalLatestBuild !== globalSupportedBuild) {
+                    currentNetworkStatus = 'update';
+                    indicator.className = 'status-badge status-update';
                 } else {
                     currentNetworkStatus = 'online';
                     indicator.className = 'status-badge status-online';
