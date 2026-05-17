@@ -2,11 +2,9 @@ name: Rocket League Patch Tracker
 
 on:
   schedule:
-    # Checks every 30 minutes. 
     - cron: '*/30 * * * *'
   workflow_dispatch:
 
-# Required to allow GitHub Actions to commit the state file back to the repo
 permissions:
   contents: write 
 
@@ -24,9 +22,10 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK2 }}
         run: |
           $rssUrl = "https://steamdb.info/api/PatchnotesRSS/?appid=252950"
-          $stateFile = ".last_patch_guid"
           
-          # 1. Load the last known patch GUID if the file exists
+          # Target the specific file in your repo
+          $stateFile = "rlsteambuild.txt"
+          
           $lastGuid = if (Test-Path $stateFile) { Get-Content $stateFile } else { "" }
           
           try {
@@ -36,10 +35,9 @@ jobs:
               $latestPatch = $xml.rss.channel.item[0]
               
               if ($null -ne $latestPatch) {
-                  # In PowerShell XML, getting the inner text of a node with attributes
                   $currentGuid = $latestPatch.guid.InnerText 
                   
-                  # 2. Compare. If they match, exit the script cleanly.
+                  # Exit if the GUID in rlsteambuild.txt matches the newest patch
                   if ($currentGuid -eq $lastGuid) {
                       Write-Output "No new updates found. Last patch is still $lastGuid."
                       exit 0
@@ -54,7 +52,6 @@ jobs:
                   $dateObj = [datetime]::ParseExact($pubDate, 'ddd, dd MMM yyyy HH:mm:ss zzz', [System.Globalization.CultureInfo]::InvariantCulture)
                   $isoDate = $dateObj.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
                   
-                  # 3. Construct the JSON payload
                   $payload = @{
                       username = "RL Patch Tracker"
                       avatar_url = "https://steamdb.info/static/logos/512px.png"
@@ -68,12 +65,11 @@ jobs:
                       )
                   } | ConvertTo-Json -Depth 5
                   
-                  # 4. Fire the webhook POST request
                   if (![string]::IsNullOrEmpty($env:DISCORD_WEBHOOK)) {
                       Invoke-RestMethod -Uri $env:DISCORD_WEBHOOK -Method Post -Body $payload -ContentType "application/json"
                       Write-Output "Successfully sent to Discord: $title"
                       
-                      # 5. Overwrite the state file with the new GUID so it gets committed
+                      # Overwrite rlsteambuild.txt with the new GUID
                       Set-Content -Path $stateFile -Value $currentGuid
                   } else {
                       Write-Error "DISCORD_WEBHOOK secret is missing."
@@ -83,18 +79,16 @@ jobs:
               Write-Error "Failed to process patch notes: $_"
           }
 
-      - name: Commit and Push State File
+      - name: Commit and Push rlsteambuild.txt
         run: |
-          # Configure git to act as the GitHub Actions bot
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Stage the state file
-          git add .last_patch_guid
+          # Stage your specific text file
+          git add rlsteambuild.txt
           
-          # Only commit and push if the file actually changed
           if ! git diff --staged --quiet; then
-            git commit -m "chore: update latest RL patch state"
+            git commit -m "chore: update latest RL patch state in rlsteambuild.txt"
             git push
           else
             echo "No state changes to commit."
