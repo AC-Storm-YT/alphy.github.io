@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'supportedbuild' # Instantly updates the state if you manually declare a build supported
+      - 'supportedbuild'
 
 permissions:
   contents: write
@@ -29,7 +29,7 @@ jobs:
           $lockFile = "lockdown.txt"
           
           # 1. Read existing tracking values from repository
-          $lastGuid = if (Test-Path $stateFile) { (Get-Content $steamFile).Trim() } else { "" }
+          $lastGuid = if (Test-Path $steamFile) { (Get-Content $steamFile).Trim() } else { "" }
           $supportedBuild = if (Test-Path $suppFile) { (Get-Content $suppFile).Trim() } else { "" }
           $currentLockdown = if (Test-Path $lockFile) { (Get-Content $lockFile).Trim() } else { "false" }
           
@@ -47,7 +47,6 @@ jobs:
                   if ($newGuid -ne $lastGuid) {
                       Write-Output "New game update detected: $newGuid"
                       
-                      # Send the standard live patch broadcast announcement message
                       $title = $latestPatch.title
                       $link = $latestPatch.link
                       $pubDate = $latestPatch.pubDate
@@ -75,10 +74,10 @@ jobs:
               Write-Error "Failed to check patch notes: $_"
           }
           
-          # 3. Evaluate target lockdown state using the fresh sync data
+          # 3. Evaluate target lockdown state
           $targetLockdown = if ($newGuid -ne $supportedBuild) { "update" } else { "false" }
           
-          # Preserve manual true/maintenance locks if you manually set lockdown.txt to true
+          # Preserve manual maintenance mode if already set to true
           if ($currentLockdown -eq "true") {
               $targetLockdown = "true"
           }
