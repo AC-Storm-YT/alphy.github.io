@@ -1,9 +1,12 @@
 name: Alphy Status Monitor
 
 on:
+  workflow_run:
+    workflows: ["Alphy Lockdown Manager"]
+    types:
+      - completed
+  workflow_dispatch:
   push:
-    branches:
-      - main
     paths:
       - 'lockdown.txt'
       - 'version.txt'
