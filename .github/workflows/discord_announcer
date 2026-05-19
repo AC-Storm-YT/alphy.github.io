@@ -1,11 +1,7 @@
 name: Discord Release Announcer
 
 on:
-  push:
-    branches:
-      - main # Make sure this matches your default branch name
-    paths:
-      - 'swapper/text' # Only runs when THIS specific file is updated
+  workflow_dispatch:
 
 jobs:
   post-to-discord:
@@ -23,9 +19,9 @@ jobs:
           MESSAGE=$(cat swapper/text)
           
           # Combine your text with the download link
-          FULL_MESSAGE="$MESSAGE\n\n📥 **Download here:** $DOWNLOAD_LINK"
+          FULL_MESSAGE="$MESSAGE\n\n📥 **Download here / Téléchargez ici:** $DOWNLOAD_LINK"
           
-          # Safely package it into JSON (handles newlines and quotes automatically)
+          # Safely package it into JSON
           JSON_PAYLOAD=$(jq -n --arg content "$FULL_MESSAGE" '{content: $content}')
           
           # Fire it off to Discord
