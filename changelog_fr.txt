@@ -1,3 +1,10 @@
+v1.4.0 - La Mise à Jour Visuelle - 22 mai 2026
+-------------------------------------------
+- Aperçus Visuels des Mods : Alphy intègre désormais une interface entièrement visuelle ! Pour la toute première fois, vous pouvez voir des icônes de haute qualité et des aperçus de vos mods directement dans l'application.
+- Icônes Cloud Dynamiques : Pour conserver une taille d'application incroyablement réduite, les images des mods ne sont pas intégrées. Alphy les télécharge automatiquement depuis notre serveur cloud et les met en cache localement.
+- Système d'Images Auto-Réparateur : L'application détecte intelligemment si une image en cache est corrompue, mal formatée ou manquante. Elle se réparera automatiquement en téléchargeant une nouvelle copie en arrière-plan.
+- Mises à Jour à Distance Transparentes : De nouvelles icônes de mods peuvent désormais être ajoutées à la base de données à distance. Elles apparaîtront instantanément dans votre application sans nécessiter une nouvelle mise à jour d'Alphy.
+
 v1.3.3 - Mise à Jour Sécurité - 16 mai 2026
 -------------------------------------------
 - Suivi des Builds : Alphy intègre désormais un nouveau système de suivi qui croise le build actuel de Rocket League avec notre liste de builds supportés via github.
