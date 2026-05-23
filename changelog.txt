@@ -1,9 +1,9 @@
-v1.4.0 - The Visual Update - May 22 2026
+v1.4.0 - The Visual Update - May 23 2026
 -------------------------------------------
 - Visual Mod Previews: Alphy now features a fully visual interface! For the very first time, you can see high-quality icons and previews of your mods directly in the app.
 - Dynamic Cloud Icons: To keep the app size incredibly small, mod images are not bundled with the application. Alphy automatically downloads them directly from our cloud server and caches them locally.
 - Self-Healing Image System: The application intelligently detects if a cached image is corrupted, improperly formatted, or missing. It will automatically repair itself by fetching a fresh copy in the background.
-- Seamless Remote Updates: New mod icons can now be added to the database remotely. They will appear instantly in your app without requiring you to download a new Alphy update.
+- Remote Updates: New mod icons can be added to the database remotely. They will appear instantly in your app without requiring you to download a new Alphy update.
 
 v1.3.3 - Safety Update - May 16 2026
 -------------------------------------------
