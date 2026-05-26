@@ -1,3 +1,8 @@
+v1.6.0 - L'Architecture des Plugins - 26 mai 2026
+-------------------------------------------
+- Gestionnaire de Plugins Intégré : Ajout d'une fenêtre dédiée au Gestionnaire de Plugins pour parcourir, installer et mettre à jour automatiquement les plugins officiels directement depuis le cloud.
+- Intégration d'Alphy Swapper : Lancement du plugin officiel Alphy Swapper. Il lit intelligemment le chemin de votre jeu depuis la mémoire, achemine automatiquement les échanges générés directement dans votre dossier de mods actifs, et déclenche instantanément un rafraîchissement de l'interface.
+
 v1.5.0 - Refonte de l'Interface - 26 mai 2026
 -------------------------------------------
 - Interface Maître-Détail : Remplacement de l'ancienne disposition par onglets par un menu latéral persistant avec émojis et une grille de mods dynamique et extensible.

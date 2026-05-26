@@ -1,3 +1,8 @@
+v1.6.0 - The Plugin Architecture - May 26 2026
+-------------------------------------------
+- In-App Plugin Manager: Added a dedicated Plugin Manager window to browse, install, and automatically update official plugins directly from the cloud.
+- Alphy Swapper Integration: Released the official Alphy Swapper plugin. It intelligently reads your game path from memory, auto-routes generated swaps directly into your active mods folder, and instantly triggers a UI refresh upon completion.
+
 v1.5.0 - The Interface Overhaul - May 26 2026
 -------------------------------------------
 - Master-Detail UI: Replaced the old tabbed layout with a persistent, emoji-categorized sidebar and a dynamic, infinitely scalable mod grid.
