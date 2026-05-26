@@ -1,3 +1,10 @@
+v1.5.0 - Refonte de l'Interface - 26 mai 2026
+-------------------------------------------
+- Interface Maître-Détail : Remplacement de l'ancienne disposition par onglets par un menu latéral persistant avec émojis et une grille de mods dynamique et extensible.
+- Recherche en Temps Réel : Ajout d'une barre de recherche pour filtrer et trouver instantanément des mods spécifiques dans toutes les catégories.
+- Suppression Intelligente des Mods : L'outil de suppression a été grandement amélioré. Il restaure désormais intelligemment vos fichiers de jeu originaux (vanilla) et nettoie automatiquement les fichiers de sauvegarde orphelins.
+- Arrière-plan Dégradé Dynamique : Remplacement de l'image de fond statique par un dégradé généré programmatiquement, léger et sans perte de qualité lors du redimensionnement de l'application.
+
 v1.4.0 - La Mise à Jour Visuelle - 23 mai 2026
 -------------------------------------------
 - Aperçus Visuels des Mods : Alphy intègre désormais une interface entièrement visuelle ! Pour la toute première fois, vous pouvez voir des icônes de haute qualité et des aperçus de vos mods directement dans l'application.

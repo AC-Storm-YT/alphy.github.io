@@ -1,3 +1,10 @@
+v1.5.0 - The Interface Overhaul - May 26 2026
+-------------------------------------------
+- Master-Detail UI: Replaced the old tabbed layout with a persistent, emoji-categorized sidebar and a dynamic, infinitely scalable mod grid.
+- Real-Time Search: Added a top-mounted search bar to instantly filter and find specific mods across all categories.
+- Smart Mod Removal: The mod deletion tool has been heavily upgraded. It now intelligently restores your original vanilla game files and cleans up orphaned backup files automatically to prevent ghost files.
+- Dynamic Gradient Background: Replaced the static background image with a lightweight, programmatic CSS-style gradient that scales perfectly without using extra memory or pixelating.
+
 v1.4.0 - The Visual Update - May 23 2026
 -------------------------------------------
 - Visual Mod Previews: Alphy now features a fully visual interface! For the very first time, you can see high-quality icons and previews of your mods directly in the app.
