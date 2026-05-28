@@ -1,3 +1,7 @@
+v1.6.1 - Category Expansion Patch - May 28 2026
+-------------------------------------------
+- Expanded Category Support: Added full native support for two new mod categories: Engine Audio and Avatar Borders. These have been seamlessly integrated into the sidebar navigation and internal mod-routing system.
+
 v1.6.0 - The Plugin Architecture - May 26 2026
 -------------------------------------------
 - In-App Plugin Manager: Added a dedicated Plugin Manager window to browse, install, and automatically update official plugins directly from the cloud.

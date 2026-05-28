@@ -1,3 +1,7 @@
+v1.6.1 - Patch d'Extension des Catégories - 28 mai 2026
+-------------------------------------------
+- Support de Catégories Étendu : Ajout d'un support natif complet pour deux nouvelles catégories de mods : Engine Audio et Avatar Borders. Celles-ci ont été parfaitement intégrées au menu de navigation latéral et au système de routage interne des mods.
+
 v1.6.0 - L'Architecture des Plugins - 26 mai 2026
 -------------------------------------------
 - Gestionnaire de Plugins Intégré : Ajout d'une fenêtre dédiée au Gestionnaire de Plugins pour parcourir, installer et mettre à jour automatiquement les plugins officiels directement depuis le cloud.
