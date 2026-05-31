@@ -1,3 +1,13 @@
+v2.0.0 - Mise à Jour Accès Discord - 31 mai 2026
+-------------------------------------------
+- Autorisation Discord : Alphy demande maintenant aux utilisateurs d'autoriser leur compte Discord avant d'accéder à l'application.
+- Accès par Rôle Member : Les utilisateurs doivent être dans le serveur Discord officiel d'Alphy avec le rôle Member requis pour utiliser la version officielle.
+- Permissions par Rôles : Ajout de la base d'un système de permissions contrôlé par le serveur, permettant de débloquer de futures fonctionnalités selon les rôles Discord sans coder les accès directement dans le code source public.
+- Affichage du Compte : Ajout d'un panneau de compte Discord affichant l'avatar, le nom d'utilisateur et la couleur du rôle le plus élevé.
+- Système d'Accès Bêta : Ajout d'une nouvelle section Bêta et de vérifications de permissions pour les fonctionnalités réservées aux bêta testeurs.
+- Refonte Visuelle : Amélioration de l'interface principale et de l'écran de connexion avec un design Alphy plus propre et plus moderne.
+- Fiabilité du Backend : Amélioration de la gestion des fichiers backend et ressources intégrés afin que les versions officielles puissent fournir plus fiablement les fichiers backend et visuels de connexion mis à jour.
+
 v1.7.1 - Patch de Vérification des Textures Personnalisées - 31 mai 2026
 -------------------------------------------
 - Correction d'un problème où les decals personnalisés, les balles personnalisées et les boost meters personnalisés pouvaient rester activés dans le panneau après une vérification/mise à jour des fichiers de Rocket League.

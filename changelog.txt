@@ -1,3 +1,13 @@
+v2.0.0 - The Discord Access Update - May 31 2026
+-------------------------------------------
+- Discord Authorization: Alphy now requires users to authorize their Discord account before entering the app.
+- Member Role Access: Users must be in the official Alphy Discord server with the required Member role to use the official build.
+- Role-Based Permissions: Added the foundation for server-controlled permissions, allowing future features to be unlocked by Discord roles without hardcoding access inside the public source code.
+- Account Display: Added a Discord account panel showing the signed-in user's avatar, username, and highest role color.
+- Beta Access System: Added a new Beta section and permission checks for beta-only features.
+- UI Refresh: Updated the main app and login experience with a cleaner, more modern Alphy design.
+- Backend Reliability: Improved bundled backend/resource handling so official builds can ship updated backend files and login visuals more reliably.
+
 v1.7.1 - Custom Texture Verification Patch - May 31 2026
 -------------------------------------------
 - Fixed an issue where custom decals, custom balls, and custom boost meters could stay enabled in the panel after verifying/updating Rocket League game files.
