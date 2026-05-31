@@ -1,3 +1,9 @@
+v1.7.0 - The Custom Texture Update - May 31 2026
+-------------------------------------------
+- AlphaConsole Custom Texture Importer: Added native support for importing and using AlphaConsole ZIP packs directly in Alphy, including custom decals, custom balls, and custom boost meters.
+- Safer Mod Removal: Removing an active mod now restores the related game files back to vanilla before deleting the mod from Alphy.
+- Faster Save Changes: Saving now skips unchanged active mods and only applies or restores mods whose state actually changed, making custom texture swaps much faster.
+
 v1.6.1 - Category Expansion Patch - May 28 2026
 -------------------------------------------
 - Expanded Category Support: Added full native support for two new mod categories: Engine Audio and Avatar Borders. These have been seamlessly integrated into the sidebar navigation and internal mod-routing system.

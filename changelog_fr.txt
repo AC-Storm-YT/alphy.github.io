@@ -1,3 +1,9 @@
+v1.7.0 - Mise à Jour des Textures Personnalisées - 31 mai 2026
+-------------------------------------------
+- Importateur de Textures AlphaConsole : Ajout du support natif pour importer et utiliser directement les packs ZIP AlphaConsole dans Alphy, incluant les decals personnalisés, les balles personnalisées et les boost meters personnalisés.
+- Suppression de Mods Plus Sûre : Supprimer un mod actif restaure maintenant les fichiers du jeu vers leur version vanilla avant de retirer le mod d'Alphy.
+- Sauvegarde des Changements Plus Rapide : La sauvegarde ignore maintenant les mods actifs inchangés et applique ou restaure seulement les mods dont l'état a vraiment changé, ce qui rend les changements de textures personnalisées beaucoup plus rapides.
+
 v1.6.1 - Patch d'Extension des Catégories - 28 mai 2026
 -------------------------------------------
 - Support de Catégories Étendu : Ajout d'un support natif complet pour deux nouvelles catégories de mods : Engine Audio et Avatar Borders. Celles-ci ont été parfaitement intégrées au menu de navigation latéral et au système de routage interne des mods.
