@@ -1,3 +1,10 @@
+v1.7.1 - Patch de Vérification des Textures Personnalisées - 31 mai 2026
+-------------------------------------------
+- Correction d'un problème où les decals personnalisés, les balles personnalisées et les boost meters personnalisés pouvaient rester activés dans le panneau après une vérification/mise à jour des fichiers de Rocket League.
+- Ajout d'une validation des octets patchés pour les mods de textures personnalisées afin qu'Alphy détecte quand le jeu a restauré ces fichiers en version vanilla.
+- Amélioration de la détection d'état des boost meters en ignorant les anciennes sauvegardes obsolètes et en recréant des sauvegardes sûres lors de la prochaine application.
+- Sauvegarder les changements réapplique maintenant correctement les textures personnalisées lorsque les fichiers du jeu ne correspondent plus au patch installé.
+
 v1.7.0 - Mise à Jour des Textures Personnalisées - 31 mai 2026
 -------------------------------------------
 - Importateur de Textures AlphaConsole : Ajout du support natif pour importer et utiliser directement les packs ZIP AlphaConsole dans Alphy, incluant les decals personnalisés, les balles personnalisées et les boost meters personnalisés.

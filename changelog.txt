@@ -1,3 +1,10 @@
+v1.7.1 - Custom Texture Verification Patch - May 31 2026
+-------------------------------------------
+- Fixed an issue where custom decals, custom balls, and custom boost meters could stay enabled in the panel after verifying/updating Rocket League game files.
+- Added patched-byte validation for custom texture mods so Alphy can detect when the game has restored those files back to vanilla.
+- Improved boost meter state detection by ignoring stale legacy backup records and recreating safe records on the next apply.
+- Save Changes now correctly re-applies custom texture mods when their game files no longer match the installed patch.
+
 v1.7.0 - The Custom Texture Update - May 31 2026
 -------------------------------------------
 - AlphaConsole Custom Texture Importer: Added native support for importing and using AlphaConsole ZIP packs directly in Alphy, including custom decals, custom balls, and custom boost meters.
