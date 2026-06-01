@@ -1,3 +1,8 @@
+v2.0.1 - Patch de Visibilite Beta - 1 juin 2026
+-------------------------------------------
+- Page Beta Visible : La page Beta est maintenant accessible a tous les utilisateurs connectes au lieu d'etre cachee derriere l'acces beta.
+- Catalogue des Fonctionnalites Beta : Ajout d'une section claire "Actuellement en beta" affichant Alphy Pro [BETA] et son etat d'acces actuel.
+
 v2.0.0 - Mise à Jour Accès Discord - 31 mai 2026
 -------------------------------------------
 - Autorisation Discord : Alphy demande maintenant aux utilisateurs d'autoriser leur compte Discord avant d'accéder à l'application.
