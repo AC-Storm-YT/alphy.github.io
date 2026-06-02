@@ -1,3 +1,13 @@
+v2.1.0 - Mise a Jour Parametres & Themes - 2 juin 2026
+-------------------------------------------
+- Page Parametres : Ajout d'une page dediee aux preferences utilisateur.
+- Option Multi-Mods : Ajout d'une option pour retirer la limite d'un mod par categorie, permettant d'activer plusieurs mods de la meme categorie.
+- Mode Streamer : Ajout d'un mode qui masque le nom d'utilisateur Discord connecte dans le panneau du compte.
+- Journaux d'Erreurs : Ajout de logs d'erreurs reserves aux beta testeurs et bug hunters. Alphy cree des logs seulement lorsqu'une vraie erreur est detectee et les place dans le dossier local Logs.
+- Systeme de Themes Beta : Ajout d'une selection de themes reservee aux beta testeurs avec apercu en direct sur l'application principale. Le theme choisi est sauvegarde et reste applique.
+- Backend Automatique : Ajout de l'export integre de texconv.exe et de la mise a jour automatique des fichiers backend dans AppData.
+- Installation Python : Ajout d'une installation automatique de Python portable et Pillow pour les mods de textures personnalisees qui en ont besoin.
+
 v2.0.1 - Patch de Visibilite Beta - 1 juin 2026
 -------------------------------------------
 - Page Beta Visible : La page Beta est maintenant accessible a tous les utilisateurs connectes au lieu d'etre cachee derriere l'acces beta.

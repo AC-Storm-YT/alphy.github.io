@@ -1,3 +1,13 @@
+v2.1.0 - The Settings & Theme Update - June 2 2026
+-------------------------------------------
+- Settings Page: Added a dedicated Settings page for user preferences.
+- Multi-Mod Option: Added an option to remove the one-mod-per-category limit, allowing multiple mods in the same category to be enabled when users want to manage conflicts themselves.
+- Streamer Mode: Added a streamer mode that hides the connected Discord username in the account panel.
+- Error Logs: Added beta/beta-support error logging for beta testers and bug hunters. Logs are only created when an actual error is detected and are saved to the local Logs folder.
+- Beta Theme System: Added beta-only theme selection with live preview across the main app. Themes are saved automatically and stay consistent across Alphy pages.
+- Backend Auto-Install: Added embedded texconv.exe export and backend file updates so custom texture tooling can be recreated in AppData when missing or outdated.
+- Python Backend Setup: Added automatic portable Python/Pillow setup for custom texture mods that require Python.
+
 v2.0.1 - Beta Visibility Patch - June 1 2026
 -------------------------------------------
 - Beta Page Visibility: The Beta page is now available to every signed-in user instead of being hidden behind beta access.
