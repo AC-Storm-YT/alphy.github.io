@@ -1,3 +1,11 @@
+v2.2.0 - Mise a Jour Partage de Mods & Configuration - 3 juin 2026
+-------------------------------------------
+- Exportation de Mods : Ajout d'une fenetre Export Mods permettant d'exporter un seul mod en ZIP partageable ou plusieurs mods sous forme de pack mods.zip.
+- Packs de Mods Alphy : Les exports multi-mods conservent maintenant la structure categorie et dossier du mod, par exemple Body\Fennec (Replaces Octane), pour simplifier le partage et l'importation.
+- Importation ZIP Alphy : L'importateur detecte maintenant les ZIPs Alphy simples et les packs mods.zip, les remet dans le bon dossier mods, puis rafraichit automatiquement la liste.
+- Configuration du Dossier Jeu : Le bouton Change Folder a ete retire du bas de l'application et la selection du dossier Rocket League a ete deplacee dans les Parametres.
+- Refonte de Remove Mods : La fenetre Remove Mods utilise maintenant le meme style de liste recherchable que Export Mods tout en gardant la restauration des mods actifs avant suppression.
+
 v2.1.1 - Patch de Polissage UI - 2 juin 2026
 -------------------------------------------
 - Stabilite des Polices : Correction d'un probleme ou ouvrir et fermer les Parametres pouvait changer la police de la console et d'autres elements de l'interface principale.

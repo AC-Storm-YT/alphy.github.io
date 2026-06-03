@@ -1,3 +1,11 @@
+v2.2.0 - Mod Sharing & Setup Update - June 3 2026
+-------------------------------------------
+- Export Mods: Added a dedicated Export Mods window where users can export one mod as a shareable ZIP or multiple mods as a mods.zip pack.
+- Alphy Mod Packs: Multi-mod exports now preserve the category and mod folder structure, such as Body\Fennec (Replaces Octane), making shared packs easy to import.
+- Alphy ZIP Import: The importer now detects Alphy single-mod ZIPs and mods.zip packs, restores them into the correct mods folder, and refreshes the mod list automatically.
+- Game Folder Setup: Removed the bottom Change Folder button and moved Rocket League folder selection into Settings.
+- Remove Mods Redesign: Rebuilt the Remove Mods window with the same searchable checklist style as Export Mods while keeping the restore-active-mod-before-delete safety system.
+
 v2.1.1 - UI Polish Patch - June 2 2026
 -------------------------------------------
 - Settings Font Stability: Fixed an issue where opening and closing Settings could change fonts on the console and other main UI elements.
