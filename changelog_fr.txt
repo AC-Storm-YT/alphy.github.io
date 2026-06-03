@@ -1,3 +1,10 @@
+v2.1.1 - Patch de Polissage UI - 2 juin 2026
+-------------------------------------------
+- Stabilite des Polices : Correction d'un probleme ou ouvrir et fermer les Parametres pouvait changer la police de la console et d'autres elements de l'interface principale.
+- Stabilite du Panneau Compte : Reduction des rafraichissements inutiles du panneau de compte lors de la fermeture des Parametres, pour un affichage plus fluide et moins visible.
+- Alignement du Role : Correction de l'alignement du texte du role avec le carre de couleur dans le panneau du compte connecte.
+- Espacement de la Page Beta : Ajout d'un meilleur espace en bas de la page Beta afin que le bouton Fermer ne soit plus trop proche du bord de la fenetre.
+
 v2.1.0 - Mise a Jour Parametres & Themes - 2 juin 2026
 -------------------------------------------
 - Page Parametres : Ajout d'une page dediee aux preferences utilisateur.

@@ -1,3 +1,10 @@
+v2.1.1 - UI Polish Patch - June 2 2026
+-------------------------------------------
+- Settings Font Stability: Fixed an issue where opening and closing Settings could change fonts on the console and other main UI elements.
+- Account Panel Stability: Reduced unnecessary account panel refreshes when closing Settings, making the bottom account card feel smoother and less distracting.
+- Account Role Alignment: Fixed the connected account card role text so it lines up cleanly with the role color square.
+- Beta Page Spacing: Added more bottom spacing to the Beta page so the Close button no longer sits too close to the window edge.
+
 v2.1.0 - The Settings & Theme Update - June 2 2026
 -------------------------------------------
 - Settings Page: Added a dedicated Settings page for user preferences.
