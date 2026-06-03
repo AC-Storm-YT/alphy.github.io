@@ -1,3 +1,9 @@
+v2.2.1 - Mod Grid Scrolling Patch - June 3 2026
+-------------------------------------------
+- Mod Grid Rendering: Reworked mod card image rendering so icons are prepared once at display size instead of being repeatedly rescaled while scrolling.
+- Scroll Stability: Reduced expensive repaint behavior in the main mods panel to help prevent broken image artifacts and lag during fast scrolling.
+- Image Cache Reliability: Loaded cached icons as independent bitmap copies so UI repaints no longer depend on disposed image streams.
+
 v2.2.0 - Mod Sharing & Setup Update - June 3 2026
 -------------------------------------------
 - Export Mods: Added a dedicated Export Mods window where users can export one mod as a shareable ZIP or multiple mods as a mods.zip pack.
