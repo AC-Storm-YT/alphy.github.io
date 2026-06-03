@@ -1,3 +1,8 @@
+v2.2.3 - Security Maintenance Patch - June 3 2026
+-------------------------------------------
+- Security Maintenance: Improved Alphy access handling and account security checks.
+- Access Messaging: Improved account access status messages for clearer user guidance.
+
 v2.2.2 - Access Stability Patch - June 3 2026
 -------------------------------------------
 - Access Stability: Improved how Alphy handles Discord access refreshes during app launch and account actions.
