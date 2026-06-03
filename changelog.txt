@@ -1,3 +1,9 @@
+v2.2.2 - Access Stability Patch - June 3 2026
+-------------------------------------------
+- Access Stability: Improved how Alphy handles Discord access refreshes during app launch and account actions.
+- Session Reliability: Added extra safeguards around saved sign-in state so Alphy handles invalid local sessions more cleanly.
+- Request Protection: Reduced unnecessary authentication refresh traffic during repeated app restarts or repeated account refresh attempts.
+
 v2.2.1 - Mod Grid Scrolling Patch - June 3 2026
 -------------------------------------------
 - Mod Grid Rendering: Reworked mod card image rendering so icons are prepared once at display size instead of being repeatedly rescaled while scrolling.
