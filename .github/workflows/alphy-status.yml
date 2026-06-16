@@ -84,7 +84,7 @@ jobs:
 
           PAYLOAD=$(jq -n \
             --arg product "$PRODUCT" \
-            --arg App "$App_STATUS" \
+            --arg App "$APP_STATUS" \
             --arg game "$GAME_VERSION" \
             --arg latest "$LATEST_BUILD" \
             --arg supported "$SUPPORTED_BUILD" \
