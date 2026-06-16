@@ -74,7 +74,8 @@ jobs:
             IMAGE_URL=""
           fi
 
-          DESCRIPTION="$TITLE\n\n# $SUBTITLE\n\n$DETAIL\n\n\n\n**Alphy Version:** $VERSION"
+          DESCRIPTION="$TITLE\n\n# $SUBTITLE\n$DETAIL"
+          THUMBNAIL_URL="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/status/rl_logo.jpg"
 
           if [ -n "$IMAGE_URL" ]; then
             IMAGE_FIELD=", \"image\": {\"url\": \"$IMAGE_URL\"}"
@@ -84,5 +85,5 @@ jobs:
 
           curl -H "Content-Type: application/json" \
           -X PATCH \
-          -d "{\"embeds\": [{\"description\": \"$DESCRIPTION\", \"color\": $COLOR$IMAGE_FIELD}]}" \
+          -d "{\"embeds\": [{\"description\": \"$DESCRIPTION\", \"color\": $COLOR, \"thumbnail\": {\"url\": \"$THUMBNAIL_URL\"}$IMAGE_FIELD, \"footer\": {\"text\": \"Alphy Version: $VERSION\"}}]}" \
           "$WEBHOOK_URL/messages/$MESSAGE_ID"
