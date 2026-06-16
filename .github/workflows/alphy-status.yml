@@ -14,6 +14,13 @@ on:
       - 'supportedbuild'
       - 'gameversion.txt'
 
+permissions:
+  contents: write
+
+concurrency:
+  group: alphy-status-monitor
+  cancel-in-progress: false
+
 jobs:
   update_discord_status:
     runs-on: ubuntu-latest
@@ -113,3 +120,104 @@ jobs:
           -X PATCH \
           -d "$PAYLOAD" \
           "$WEBHOOK_URL/messages/$MESSAGE_ID"
+
+      - name: Announce update or maintenance changes
+        env:
+          ANNOUNCEMENTS_WEBHOOK_URL: ${{ secrets.DISCORD_ANNOUNCEMENTS_WEBHOOK }}
+          ANNOUNCEMENT_PING: "@everyone"
+          STATUS_CHANNEL_ID: "1503498683373584557"
+        run: |
+          set -euo pipefail
+
+          STATE_FILE="announcement-state.txt"
+          STATUS=$(cat lockdown.txt | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
+          LAST_STATUS=""
+
+          if [ -f "$STATE_FILE" ]; then
+            LAST_STATUS=$(cat "$STATE_FILE" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
+          fi
+
+          echo "Current status: $STATUS"
+          echo "Last announced status: ${LAST_STATUS:-none}"
+
+          if [ "$STATUS" = "$LAST_STATUS" ]; then
+            echo "No announcement needed. This status was already handled."
+            exit 0
+          fi
+
+          SHOULD_ANNOUNCE="false"
+          ANNOUNCE_TITLE=""
+          ANNOUNCE_DESCRIPTION=""
+          ANNOUNCE_COLOR=8421504
+
+          if [ "$STATUS" = "update" ]; then
+            SHOULD_ANNOUNCE="true"
+            ANNOUNCE_TITLE="Alphy currently requires an update before it can function properly."
+            ANNOUNCE_COLOR=16753920
+            ANNOUNCE_DESCRIPTION=$(cat <<EOF
+A new Rocket League update may have been detected, and Alphy needs to be checked before we put it back online.
+
+User satisfaction and stability are our top priorities, so we are verifying everything before restoring service.
+
+See the status channel: <#$STATUS_CHANNEL_ID>
+
+THIS IS AN AUTOMATED MESSAGE FROM ALPHY SYSTEM.
+EOF
+)
+          elif [ "$STATUS" = "true" ]; then
+            SHOULD_ANNOUNCE="true"
+            ANNOUNCE_TITLE="Alphy is currently under maintenance."
+            ANNOUNCE_COLOR=16711680
+            ANNOUNCE_DESCRIPTION=$(cat <<EOF
+We are temporarily taking the app offline while we perform checks, updates, or backend maintenance.
+
+User satisfaction and stability are our top priorities, so we will restore service as soon as everything is verified.
+
+See the status channel: <#$STATUS_CHANNEL_ID>
+
+THIS IS AN AUTOMATED MESSAGE FROM ALPHY SYSTEM.
+EOF
+)
+          fi
+
+          if [ "$SHOULD_ANNOUNCE" = "true" ]; then
+            if [ -z "${ANNOUNCEMENTS_WEBHOOK_URL:-}" ]; then
+              echo "::warning::DISCORD_ANNOUNCEMENTS_WEBHOOK is not set. Announcement was not sent, and state was not updated."
+              exit 0
+            fi
+
+            PAYLOAD=$(jq -n \
+              --arg content "$ANNOUNCEMENT_PING" \
+              --arg title "$ANNOUNCE_TITLE" \
+              --arg description "$ANNOUNCE_DESCRIPTION" \
+              --argjson color "$ANNOUNCE_COLOR" \
+              '{
+                content: $content,
+                allowed_mentions: {parse: ["everyone"]},
+                embeds: [{
+                  title: $title,
+                  description: $description,
+                  color: $color
+                }]
+              }')
+
+            curl -H "Content-Type: application/json" \
+            -X POST \
+            -d "$PAYLOAD" \
+            "$ANNOUNCEMENTS_WEBHOOK_URL"
+          else
+            echo "Status does not require an announcement. Updating announcement state only."
+          fi
+
+          echo "$STATUS" > "$STATE_FILE"
+
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add "$STATE_FILE"
+
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: update last announced Alphy status"
+            git push
+          else
+            echo "Announcement state is already up to date."
+          fi
