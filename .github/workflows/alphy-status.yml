@@ -54,24 +54,24 @@ jobs:
 
           if [ "$STATUS" == "true" ]; then
             # Lockdown is TRUE -> MAINTENANCE/RED
-            App_STATUS="MAINTENANCE"
+            APP_STATUS="MAINTENANCE"
             COLOR=16711680 # Red
             DETAIL="The mod network is temporarily offline for upgrades."
             IMAGE_URL="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/status/Alphy_Maintenance_Banner.png"
           elif [ "$STATUS" == "false" ]; then
             # Lockdown is FALSE -> OPERATIONAL/GREEN
-            App_STATUS="OPERATIONAL"
+            APP_STATUS="OPERATIONAL"
             COLOR=65280 # Green
             DETAIL="All systems are running normally. Happy modding!"
             IMAGE_URL="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/status/Alphy_Operational_Banner.png"
           elif [ "$STATUS" == "update" ]; then
             # Lockdown is UPDATE -> UPDATE REQUIRED/ORANGE
-            App_STATUS="UPDATING"
+            APP_STATUS="UPDATING"
             COLOR=16753920 # Orange
             DETAIL="Alphy requires an update to support the latest Rocket League patch."
             IMAGE_URL="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/status/Alphy_Updating_Banner.png"
           else
-            App_STATUS="UNKNOWN"
+            APP_STATUS="UNKNOWN"
             COLOR=8421504 # Gray
             DETAIL="lockdown.txt was updated, but the status is unknown: $STATUS"
             IMAGE_URL=""
@@ -84,7 +84,7 @@ jobs:
 
           PAYLOAD=$(jq -n \
             --arg product "$PRODUCT" \
-            --arg App "$APP_STATUS" \
+            --arg app "$APP_STATUS" \
             --arg game "$GAME_VERSION" \
             --arg latest "$LATEST_BUILD" \
             --arg supported "$SUPPORTED_BUILD" \
@@ -99,7 +99,7 @@ jobs:
                 thumbnail: {url: $thumbnail},
                 fields: [
                   {name: "Product", value: $product, inline: true},
-                  {name: "App Status", value: $App, inline: true},
+                  {name: "App Status", value: $app, inline: true},
                   {name: "Game Version", value: $game, inline: true},
                   {name: "Latest Build", value: $latest, inline: true},
                   {name: "Supported Build", value: $supported, inline: true},
