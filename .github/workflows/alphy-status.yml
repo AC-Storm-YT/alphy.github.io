@@ -12,6 +12,7 @@ on:
       - 'version.txt'
       - 'rlsteambuild.txt'
       - 'supportedbuild'
+      - 'gameversion.txt'
 
 jobs:
   update_discord_status:
@@ -45,45 +46,70 @@ jobs:
             SUPP_BUILD="Unknown"
           fi
 
+          if [ -f "gameversion.txt" ]; then
+            GAME_VERSION=$(cat gameversion.txt | tr -d '\n' | tr -d '\r')
+          else
+            GAME_VERSION="$RL_STEAM"
+          fi
+
           if [ "$STATUS" == "true" ]; then
-            # (Lockdown is TRUE -> MAINTENANCE/RED)
-            TITLE="⚠️ **MAINTENANCE**"
+            # Lockdown is TRUE -> MAINTENANCE/RED
+            LOADER_STATUS="MAINTENANCE"
             COLOR=16711680 # Red
-            SUBTITLE="__System Status__"
-            DETAIL="*The mod network is temporarily offline for upgrades.*"
+            DETAIL="The mod network is temporarily offline for upgrades."
             IMAGE_URL="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/status/Alphy_Maintenance_Banner.png"
           elif [ "$STATUS" == "false" ]; then
-            # (Lockdown is FALSE -> OPERATIONAL/GREEN)
-            TITLE="✅ **OPERATIONAL**"
+            # Lockdown is FALSE -> OPERATIONAL/GREEN
+            LOADER_STATUS="OPERATIONAL"
             COLOR=65280 # Green
-            SUBTITLE="__System Status__"
-            DETAIL="*All systems are running normally. Happy modding!*"
+            DETAIL="All systems are running normally. Happy modding!"
             IMAGE_URL="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/status/Alphy_Operational_Banner.png"
           elif [ "$STATUS" == "update" ]; then
-            # (Lockdown is UPDATE -> UPDATE REQUIRED/ORANGE)
-            TITLE="🔄 **UPDATE REQUIRED**"
+            # Lockdown is UPDATE -> UPDATE REQUIRED/ORANGE
+            LOADER_STATUS="UPDATING"
             COLOR=16753920 # Orange
-            SUBTITLE="__System Status__"
-            DETAIL="*Alphy requires an update to support the latest Rocket League patch.*\n\n**Supported Build:** $SUPP_BUILD\n**Latest Build:** $RL_STEAM"
+            DETAIL="Alphy requires an update to support the latest Rocket League patch."
             IMAGE_URL="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/status/Alphy_Updating_Banner.png"
           else
-            TITLE="❓ **UNKNOWN**"
+            LOADER_STATUS="UNKNOWN"
             COLOR=8421504 # Gray
-            SUBTITLE="__System Status__"
             DETAIL="lockdown.txt was updated, but the status is unknown: $STATUS"
             IMAGE_URL=""
           fi
 
-          DESCRIPTION="$TITLE\n\n# $SUBTITLE\n$DETAIL"
+          PRODUCT=$'Rocket League\nAlphy'
+          LATEST_BUILD="$RL_STEAM"
+          SUPPORTED_BUILD="$SUPP_BUILD"
           THUMBNAIL_URL="https://raw.githubusercontent.com/AC-Storm-YT/alphy.github.io/refs/heads/main/status/rl_logo.jpg"
 
-          if [ -n "$IMAGE_URL" ]; then
-            IMAGE_FIELD=", \"image\": {\"url\": \"$IMAGE_URL\"}"
-          else
-            IMAGE_FIELD=""
-          fi
+          PAYLOAD=$(jq -n \
+            --arg product "$PRODUCT" \
+            --arg loader "$LOADER_STATUS" \
+            --arg game "$GAME_VERSION" \
+            --arg latest "$LATEST_BUILD" \
+            --arg supported "$SUPPORTED_BUILD" \
+            --arg message "$DETAIL" \
+            --arg thumbnail "$THUMBNAIL_URL" \
+            --arg image "$IMAGE_URL" \
+            --arg footer "Alphy Version: $VERSION" \
+            --argjson color "$COLOR" \
+            '{
+              embeds: [({
+                color: $color,
+                thumbnail: {url: $thumbnail},
+                fields: [
+                  {name: "Product", value: $product, inline: true},
+                  {name: "Loader Status", value: $loader, inline: true},
+                  {name: "Game Version", value: $game, inline: true},
+                  {name: "Latest Build", value: $latest, inline: true},
+                  {name: "Supported Build", value: $supported, inline: true},
+                  {name: "Status Message", value: $message, inline: false}
+                ],
+                footer: {text: $footer}
+              } + (if $image != "" then {image: {url: $image}} else {} end))]
+            }')
 
           curl -H "Content-Type: application/json" \
           -X PATCH \
-          -d "{\"embeds\": [{\"description\": \"$DESCRIPTION\", \"color\": $COLOR, \"thumbnail\": {\"url\": \"$THUMBNAIL_URL\"}$IMAGE_FIELD, \"footer\": {\"text\": \"Alphy Version: $VERSION\"}}]}" \
+          -d "$PAYLOAD" \
           "$WEBHOOK_URL/messages/$MESSAGE_ID"
